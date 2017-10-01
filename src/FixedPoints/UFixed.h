@@ -1,0 +1,205 @@
+#pragma once
+
+#include "Details.h"
+#include "UFixedBase.h"
+
+FIXED_POINTS_BEGIN_NAMESPACE
+
+//
+// Declaration
+//
+
+template< unsigned Integer, unsigned Fraction >
+class UFixed : FIXED_POINTS_DETAILS::UFixedBase< Integer, Fraction >
+{
+public:
+	static_assert((Integer + Fraction) <= FIXED_POINTS_DETAILS::BitSize<uintmax_t>::Value, "Platform does not have a native type large enough for UFixed.");
+
+public:
+	using IntegerType = FIXED_POINTS_DETAILS::LeastUInt<Integer>;
+	using FractionType = FIXED_POINTS_DETAILS::LeastUInt<Fraction>;
+	using InternalType = FIXED_POINTS_DETAILS::LeastUInt<Integer + Fraction>;
+	
+	using ShiftType = FIXED_POINTS_DETAILS::LeastUInt<Integer + Fraction>;
+	using MaskType = FIXED_POINTS_DETAILS::LeastUInt<Integer + Fraction>;
+
+	constexpr const static uintmax_t IntegerSize = Integer;
+	constexpr const static uintmax_t FractionSize = Fraction;
+	constexpr const static uintmax_t LogicalSize = IntegerSize + FractionSize;
+	constexpr const static uintmax_t InternalSize = FIXED_POINTS_DETAILS::BitSize<InternalType>::Value;
+	
+	constexpr const static uintmax_t Scale = 1ULL << FractionSize;
+	
+public:
+	constexpr const static ShiftType IntegerShift = FractionSize;
+	constexpr const static ShiftType FractionShift = 0;
+	
+	constexpr const static MaskType IntegerMask = FIXED_POINTS_DETAILS::IdentityMask<IntegerSize>::Value;
+	constexpr const static MaskType FractionMask = FIXED_POINTS_DETAILS::IdentityMask<FractionSize>::Value;
+	
+	constexpr const static MaskType IdentityMask = (IntegerMask << IntegerShift) | (FractionMask << FractionShift);
+	
+	constexpr const static MaskType MidpointMask = FIXED_POINTS_DETAILS::MsbMask<FractionSize>::Value;
+	constexpr const static MaskType LesserMidpointMask = MidpointMask - 1;
+
+private:
+	using Base = FIXED_POINTS_DETAILS::UFixedBase<Integer, Fraction>;
+	using RawType = typename Base::RawType;
+
+public:
+	using Base::Base;
+
+	constexpr UFixed(void);
+	constexpr UFixed(const IntegerType & integer);
+	constexpr UFixed(const IntegerType & integer, const FractionType & fraction);
+
+	constexpr InternalType getInternal(void) const;
+	constexpr IntegerType getInteger(void) const;
+	constexpr FractionType getFraction(void) const;
+
+	constexpr explicit operator IntegerType(void) const;
+	constexpr explicit operator float(void) const;
+	constexpr explicit operator double(void) const;
+
+	template< unsigned IntegerOut, unsigned FractionOut >
+	constexpr explicit operator UFixed<IntegerOut, FractionOut>(void) const;
+
+	constexpr static UFixed fromInternal(const InternalType & value);
+
+	UFixed & operator ++(void);
+	UFixed & operator --(void);
+	UFixed & operator +=(const UFixed & other);
+	UFixed & operator -=(const UFixed & other);
+	UFixed & operator *=(const UFixed & other);
+	UFixed & operator /=(const UFixed & other);
+	
+public:
+	const static UFixed Epsilon;
+	const static UFixed MinValue;
+	const static UFixed MaxValue;
+	
+	const static UFixed Pi;
+	const static UFixed E;
+	const static UFixed Phi;
+	const static UFixed Tau;
+};
+
+//
+// Variables
+//
+
+template< unsigned Integer, unsigned Fraction >
+constexpr const UFixed<Integer, Fraction> UFixed<Integer, Fraction>::Epsilon = UFixed<Integer, Fraction>::fromInternal(1);
+
+template< unsigned Integer, unsigned Fraction >
+constexpr const UFixed<Integer, Fraction> UFixed<Integer, Fraction>::MinValue = UFixed::fromInternal(0);
+
+template< unsigned Integer, unsigned Fraction >
+constexpr const UFixed<Integer, Fraction> UFixed<Integer, Fraction>::MaxValue = UFixed::fromInternal(~0);
+
+// 40 digits is probably enough for these
+template< unsigned Integer, unsigned Fraction >
+constexpr const UFixed<Integer, Fraction> UFixed<Integer, Fraction>::Pi = 3.1415926535897932384626433832795028841971;
+
+template< unsigned Integer, unsigned Fraction >
+constexpr const UFixed<Integer, Fraction> UFixed<Integer, Fraction>::E = 2.718281828459045235360287471352662497757;
+
+template< unsigned Integer, unsigned Fraction >
+constexpr const UFixed<Integer, Fraction> UFixed<Integer, Fraction>::Phi = 1.6180339887498948482045868343656381177203;
+
+template< unsigned Integer, unsigned Fraction >
+constexpr const UFixed<Integer, Fraction> UFixed<Integer, Fraction>::Tau = 6.2831853071795864769252867665590057683943;
+
+
+//
+// Free functions
+//
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer * 2, Fraction * 2> multiply(const UFixed<Integer, Fraction> & left, const UFixed<Integer, Fraction> & right);
+
+
+//
+// Basic Logic Operations
+//
+
+template< unsigned Integer, unsigned Fraction >
+constexpr bool operator ==(const UFixed<Integer, Fraction> & left, const UFixed<Integer, Fraction> & right);
+
+template< unsigned Integer, unsigned Fraction >
+constexpr bool operator !=(const UFixed<Integer, Fraction> & left, const UFixed<Integer, Fraction> & right);
+
+template< unsigned Integer, unsigned Fraction >
+constexpr bool operator <(const UFixed<Integer, Fraction> & left, const UFixed<Integer, Fraction> & right);
+
+template< unsigned Integer, unsigned Fraction >
+constexpr bool operator >(const UFixed<Integer, Fraction> & left, const UFixed<Integer, Fraction> & right);
+
+template< unsigned Integer, unsigned Fraction >
+constexpr bool operator <=(const UFixed<Integer, Fraction> & left, const UFixed<Integer, Fraction> & right);
+
+template< unsigned Integer, unsigned Fraction >
+constexpr bool operator >=(const UFixed<Integer, Fraction> & left, const UFixed<Integer, Fraction> & right);
+
+//
+// Inter-size Logic Operations
+//
+
+template< unsigned IntegerLeft, unsigned FractionLeft, unsigned IntegerRight, unsigned FractionRight >
+constexpr bool operator ==(const UFixed<IntegerLeft, FractionLeft> & left, const UFixed<IntegerRight, FractionRight> & right);
+
+template< unsigned IntegerLeft, unsigned FractionLeft, unsigned IntegerRight, unsigned FractionRight >
+constexpr bool operator !=(const UFixed<IntegerLeft, FractionLeft> & left, const UFixed<IntegerRight, FractionRight> & right);
+
+template< unsigned IntegerLeft, unsigned FractionLeft, unsigned IntegerRight, unsigned FractionRight >
+constexpr bool operator <(const UFixed<IntegerLeft, FractionLeft> & left, const UFixed<IntegerRight, FractionRight> & right);
+
+template< unsigned IntegerLeft, unsigned FractionLeft, unsigned IntegerRight, unsigned FractionRight >
+constexpr bool operator >(const UFixed<IntegerLeft, FractionLeft> & left, const UFixed<IntegerRight, FractionRight> & right);
+
+template< unsigned IntegerLeft, unsigned FractionLeft, unsigned IntegerRight, unsigned FractionRight >
+constexpr bool operator <=(const UFixed<IntegerLeft, FractionLeft> & left, const UFixed<IntegerRight, FractionRight> & right);
+
+template< unsigned IntegerLeft, unsigned FractionLeft, unsigned IntegerRight, unsigned FractionRight >
+constexpr bool operator >=(const UFixed<IntegerLeft, FractionLeft> & left, const UFixed<IntegerRight, FractionRight> & right);
+
+//
+// Basic Arithmetic Operations
+//
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction> operator +(const UFixed<Integer, Fraction> & left, const UFixed<Integer, Fraction> & right);
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction> operator -(const UFixed<Integer, Fraction> & left, const UFixed<Integer, Fraction> & right);
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction> operator *(const UFixed<Integer, Fraction> & left, const UFixed<Integer, Fraction> & right);
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction> operator /(const UFixed<Integer, Fraction> & left, const UFixed<Integer, Fraction> & right);
+
+//
+// Inter-size Arithmetic Operations
+//
+
+template< unsigned IntegerLeft, unsigned FractionLeft, unsigned IntegerRight, unsigned FractionRight >
+constexpr auto operator +(const UFixed<IntegerLeft, FractionLeft> & left, const UFixed<IntegerRight, FractionRight> & right)
+	-> FIXED_POINTS_DETAILS::LargerType< UFixed<IntegerLeft, FractionLeft>, UFixed<IntegerRight, FractionRight> >;
+
+template< unsigned IntegerLeft, unsigned FractionLeft, unsigned IntegerRight, unsigned FractionRight >
+constexpr auto operator -(const UFixed<IntegerLeft, FractionLeft> & left, const UFixed<IntegerRight, FractionRight> & right)
+	-> FIXED_POINTS_DETAILS::LargerType< UFixed<IntegerLeft, FractionLeft>, UFixed<IntegerRight, FractionRight> >;
+
+template< unsigned IntegerLeft, unsigned FractionLeft, unsigned IntegerRight, unsigned FractionRight >
+constexpr auto operator *(const UFixed<IntegerLeft, FractionLeft> & left, const UFixed<IntegerRight, FractionRight> & right)
+	-> FIXED_POINTS_DETAILS::LargerType< UFixed<IntegerLeft, FractionLeft>, UFixed<IntegerRight, FractionRight> >;
+
+template< unsigned IntegerLeft, unsigned FractionLeft, unsigned IntegerRight, unsigned FractionRight >
+inline constexpr auto operator /(const UFixed<IntegerLeft, FractionLeft> & left, const UFixed<IntegerRight, FractionRight> & right)
+	-> FIXED_POINTS_DETAILS::LargerType< UFixed<IntegerLeft, FractionLeft>, UFixed<IntegerRight, FractionRight> >;
+	
+FIXED_POINTS_END_NAMESPACE
+
+#include "UFixedMemberFunctions.h"
+#include "UFixedFreeFunctions.h"
