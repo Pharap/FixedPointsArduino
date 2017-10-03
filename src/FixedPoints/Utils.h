@@ -203,7 +203,7 @@ template< unsigned Integer, unsigned Fraction >
 UFixed<Integer, Fraction> randomUFixed(const UFixed<Integer, Fraction> & inclusiveLowerBound, const UFixed<Integer, Fraction> & exclusiveUpperBound)
 {
 	using InternalType = typename UFixed<Integer, Fraction>::InternalType;
-	return UFixed<Integer, Fraction>::fromInternal(inclusiveLowerBound.getInternal() + FIXED_POINTS_DETAILS::RandomHelper<InternalType>::Random() % exclusiveUpperBound.getInternal());
+	return UFixed<Integer, Fraction>::fromInternal(inclusiveLowerBound.getInternal() + (FIXED_POINTS_DETAILS::RandomHelper<InternalType>::Random() % (exclusiveUpperBound.getInternal() - inclusiveLowerBound.getInternal())));
 }
 
 //
@@ -228,6 +228,7 @@ template< unsigned Integer, unsigned Fraction >
 SFixed<Integer, Fraction> randomSFixed(const SFixed<Integer, Fraction> & inclusiveLowerBound, const SFixed<Integer, Fraction> & exclusiveUpperBound)
 {
 	using InternalType = typename SFixed<Integer, Fraction>::InternalType;
-	return SFixed<Integer, Fraction>::fromInternal(inclusiveLowerBound.getInternal() + FIXED_POINTS_DETAILS::RandomHelper<InternalType>::Random() % exclusiveUpperBound.getInternal());
+	auto value = FIXED_POINTS_DETAILS::RandomHelper<InternalType>::Random();
+	return SFixed<Integer, Fraction>::fromInternal(inclusiveLowerBound.getInternal() + (abs(value) % (exclusiveUpperBound.getInternal() - inclusiveLowerBound.getInternal())));
 }
 FIXED_POINTS_END_NAMESPACE
