@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Arduino.h>
 #include <limits.h>
 #include <stdint.h>
 
@@ -203,17 +204,17 @@ namespace FIXED_POINTS_DETAILS
 		static inline int64_t Random() { return (static_cast<int64_t>(random()) << 32) | static_cast<int64_t>(random()); }
 	};
 
-	// Here be dragons!!
-	//
-	//
-	//
-	//  /\___/\  ~
-	// ( O . O ) \\
-	//  >  ^  <  //
-	// ( \   / )//
-	//  u U U u
-	//
-	//  Or cats?
-	//  ~Mwrow~
+	///////////////////////
+	// Here be dragons!! //
+	//                   //
+	//     /\___/\  _    //
+	//    ( O . O ) \\   //
+	//     >  ^  <  //   //
+	//    ( \   / )//    //
+	//     u U U u       //
+	//                   //
+	//    Or cats?...    //
+	//     ~Mwrow~       //
+	///////////////////////
 }
 FIXED_POINTS_END_NAMESPACE

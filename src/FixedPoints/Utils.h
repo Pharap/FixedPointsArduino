@@ -116,8 +116,8 @@ constexpr SFixed<Integer, Fraction> roundFixed(const SFixed<Integer, Fraction> &
 	return
 		(
 			((value.getInternal() & OutputType::MidpointMask) != 0) &&
-			!signbitFixed(value) ||
-			((value.getInternal() & OutputType::LesserMidpointMask) != 0)
+			(!signbitFixed(value) ||
+			((value.getInternal() & OutputType::LesserMidpointMask) != 0))
 		)
 		? ceilFixed(value)
 		: floorFixed(value);
