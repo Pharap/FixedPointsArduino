@@ -75,7 +75,6 @@ constexpr UFixed<Integer, Fraction>::operator UFixed<IntegerOut, FractionOut>(vo
 	using OutputShiftType = typename OutputType::ShiftType;
 	
 	using InputType = UFixed<Integer, Fraction>;
-	using InputInternalType = typename InputType::InternalType;
 	using InputShiftType = typename InputType::ShiftType;
 	
 	return

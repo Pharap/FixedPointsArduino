@@ -35,7 +35,7 @@ constexpr typename SFixed<Integer, Fraction>::InternalType SFixed<Integer, Fract
 template< unsigned Integer, unsigned Fraction >
 constexpr typename SFixed<Integer, Fraction>::IntegerType SFixed<Integer, Fraction>::getInteger(void) const
 {
-	return static_cast<IntegerType>(this->value >> IntegerShift) & IntegerMask | ((this->value < 0) ? ~IntegerMask : 0);
+	return (static_cast<IntegerType>(this->value >> IntegerShift) & IntegerMask) | ((this->value < 0) ? ~IntegerMask : 0);
 }
 
 template< unsigned Integer, unsigned Fraction >
@@ -57,10 +57,6 @@ constexpr SFixed<Integer, Fraction>::operator IntegerType(void) const
 template< unsigned Integer, unsigned Fraction >
 constexpr SFixed<Integer, Fraction>::operator float(void) const
 {
-	/*return (1.0f / Scale) *
-	(this->value < 0) ?
-	-((-this->value) & IdentityMask) :
-	this->value & IdentityMask;	*/
 	return (1.0f / Scale) *
 	static_cast<InternalType>
 	((this->value & IdentityMask) |
@@ -70,10 +66,6 @@ constexpr SFixed<Integer, Fraction>::operator float(void) const
 template< unsigned Integer, unsigned Fraction >
 constexpr SFixed<Integer, Fraction>::operator double(void) const
 {
-	/*return (1.0 / Scale) *
-	(this->value < 0) ?
-	-((-this->value) & IdentityMask) :
-	this->value & IdentityMask;	*/
 	return (1.0 / Scale) *
 	static_cast<InternalType>
 	((this->value & IdentityMask) |
@@ -84,12 +76,11 @@ template< unsigned Integer, unsigned Fraction >
 template< unsigned IntegerOut, unsigned FractionOut >
 constexpr SFixed<Integer, Fraction>::operator SFixed<IntegerOut, FractionOut>(void) const
 {	
-	using OutputType = UFixed<IntegerOut, FractionOut>;
+	using OutputType = SFixed<IntegerOut, FractionOut>;
 	using OutputInternalType = typename OutputType::InternalType;
 	using OutputShiftType = typename OutputType::ShiftType;
 	
-	using InputType = UFixed<Integer, Fraction>;
-	using InputInternalType = typename InputType::InternalType;
+	using InputType = SFixed<Integer, Fraction>;
 	using InputShiftType = typename InputType::ShiftType;
 	
 	return
