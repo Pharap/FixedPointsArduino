@@ -28,8 +28,21 @@ This means:
   - Any unmodified code must carry the same Apache 2.0 licence.
 - You may not use any trademarks owned by the licensor.
 
+## Conditional Compilation
+
+These are symbols you can define prior to library inclusion to alter the behaviour of the library.
+
+- `FIXED_POINTS_USE_NAMESPACE`: Define this to wrap all classes and functions in the namespace `FixedPoints`. Useful for preventing naming conflicts.
+
 ## Contents
 This library supplies two core types and sixteen type aliases.
+
+### Defines
+
+- `FIXED_POINTS_NAMESPACE`: The namespace used by FixedPoints. This is empty unless `FIXED_POINTS_USE_NAMESPACE` is defined prior to inclusion.
+- `FIXED_POINTS_DETAILS`: An infrastructure macro that should not be used in user code. It is safe to undefine this if it is causing problems.
+- `FIXED_POINTS_BEGIN_NAMESPACE`: An infrastructure macro that should not be used in user code. It is safe to undefine this if it is causing problems.
+- `FIXED_POINTS_END_NAMESPACE`: An infrastructure macro that should not be used in user code. It is safe to undefine this if it is causing problems.
 
 ### Core Types:
 The core types are provided by `FixedPoints.h`.
