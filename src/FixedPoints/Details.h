@@ -167,6 +167,7 @@ namespace FIXED_POINTS_DETAILS
 	using DecimalLiteralF = decltype(0.0F);
 	using DecimalLiteralL = decltype(0.0L);
 	
+#if !defined(FIXED_POINTS_NO_RANDOM)
 	template< typename T >
 	struct RandomHelper;
 	
@@ -217,6 +218,7 @@ namespace FIXED_POINTS_DETAILS
 	{
 		static inline int64_t Random() { return (static_cast<int64_t>(random()) << 32) | static_cast<int64_t>(random()); }
 	};
+#endif
 
 	///////////////////////
 	// Here be dragons!! //
