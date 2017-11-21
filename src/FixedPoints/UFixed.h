@@ -88,41 +88,16 @@ public:
 	UFixed & operator /=(const UFixed & other);
 	
 public:
-	const static UFixed Epsilon;
-	const static UFixed MinValue;
-	const static UFixed MaxValue;
+	constexpr const static UFixed Epsilon = UFixed::fromInternal(1);
+	constexpr const static UFixed MinValue = UFixed::fromInternal(0);
+	constexpr const static UFixed MaxValue = UFixed::fromInternal(~0);
 	
-	const static UFixed Pi;
-	const static UFixed E;
-	const static UFixed Phi;
-	const static UFixed Tau;
+	// 40 digits is probably enough for these
+	constexpr const static UFixed Pi = 3.1415926535897932384626433832795028841971;
+	constexpr const static UFixed E = 2.718281828459045235360287471352662497757;
+	constexpr const static UFixed Phi = 1.6180339887498948482045868343656381177203;
+	constexpr const static UFixed Tau = 6.2831853071795864769252867665590057683943;
 };
-
-//
-// Variables
-//
-
-template< unsigned Integer, unsigned Fraction >
-constexpr const UFixed<Integer, Fraction> UFixed<Integer, Fraction>::Epsilon = UFixed<Integer, Fraction>::fromInternal(1);
-
-template< unsigned Integer, unsigned Fraction >
-constexpr const UFixed<Integer, Fraction> UFixed<Integer, Fraction>::MinValue = UFixed::fromInternal(0);
-
-template< unsigned Integer, unsigned Fraction >
-constexpr const UFixed<Integer, Fraction> UFixed<Integer, Fraction>::MaxValue = UFixed::fromInternal(~0);
-
-// 40 digits is probably enough for these
-template< unsigned Integer, unsigned Fraction >
-constexpr const UFixed<Integer, Fraction> UFixed<Integer, Fraction>::Pi = 3.1415926535897932384626433832795028841971;
-
-template< unsigned Integer, unsigned Fraction >
-constexpr const UFixed<Integer, Fraction> UFixed<Integer, Fraction>::E = 2.718281828459045235360287471352662497757;
-
-template< unsigned Integer, unsigned Fraction >
-constexpr const UFixed<Integer, Fraction> UFixed<Integer, Fraction>::Phi = 1.6180339887498948482045868343656381177203;
-
-template< unsigned Integer, unsigned Fraction >
-constexpr const UFixed<Integer, Fraction> UFixed<Integer, Fraction>::Tau = 6.2831853071795864769252867665590057683943;
 
 
 //
