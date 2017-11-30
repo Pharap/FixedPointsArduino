@@ -31,6 +31,10 @@
 #define FIXED_POINTS_DETAILS FixedPointsDetails
 #endif
 
+#if defined(ESP8266)
+#define FIXED_POINTS_NO_RANDOM
+#endif
+
 // Pay no attention to the man behind the curtains
 
 FIXED_POINTS_BEGIN_NAMESPACE
