@@ -89,41 +89,16 @@ public:
 	SFixed & operator /=(const SFixed & other);
 	
 public:
-	const static SFixed Epsilon;
-	const static SFixed MinValue;
-	const static SFixed MaxValue;
+	constexpr const static SFixed Epsilon = SFixed::fromInternal(1);
+	constexpr const static SFixed MinValue = SFixed::fromInternal(FIXED_POINTS_DETAILS::MsbMask<InternalSize>::Value);
+	constexpr const static SFixed MaxValue = SFixed::fromInternal(~FIXED_POINTS_DETAILS::MsbMask<InternalSize>::Value);
 	
-	const static SFixed Pi;
-	const static SFixed E;
-	const static SFixed Phi;
-	const static SFixed Tau;
+	// 40 digits is probably enough for these
+	constexpr const static SFixed Pi = 3.1415926535897932384626433832795028841971;
+	constexpr const static SFixed E = 2.718281828459045235360287471352662497757;
+	constexpr const static SFixed Phi = 1.6180339887498948482045868343656381177203;
+	constexpr const static SFixed Tau = 6.2831853071795864769252867665590057683943;
 };
-
-//
-// Variables
-//
-
-template< unsigned Integer, unsigned Fraction >
-constexpr const SFixed<Integer, Fraction> SFixed<Integer, Fraction>::Epsilon = SFixed<Integer, Fraction>::fromInternal(1);
-
-template< unsigned Integer, unsigned Fraction >
-constexpr const SFixed<Integer, Fraction> SFixed<Integer, Fraction>::MinValue = SFixed::fromInternal(FIXED_POINTS_DETAILS::MsbMask<InternalSize>::Value);
-
-template< unsigned Integer, unsigned Fraction >
-constexpr const SFixed<Integer, Fraction> SFixed<Integer, Fraction>::MaxValue = SFixed::fromInternal(~FIXED_POINTS_DETAILS::MsbMask<InternalSize>::Value);
-
-// 40 digits is probably enough for these
-template< unsigned Integer, unsigned Fraction >
-constexpr const SFixed<Integer, Fraction> SFixed<Integer, Fraction>::Pi = 3.1415926535897932384626433832795028841971;
-
-template< unsigned Integer, unsigned Fraction >
-constexpr const SFixed<Integer, Fraction> SFixed<Integer, Fraction>::E = 2.718281828459045235360287471352662497757;
-
-template< unsigned Integer, unsigned Fraction >
-constexpr const SFixed<Integer, Fraction> SFixed<Integer, Fraction>::Phi = 1.6180339887498948482045868343656381177203;
-
-template< unsigned Integer, unsigned Fraction >
-constexpr const SFixed<Integer, Fraction> SFixed<Integer, Fraction>::Tau = 6.2831853071795864769252867665590057683943;
 
 
 //
