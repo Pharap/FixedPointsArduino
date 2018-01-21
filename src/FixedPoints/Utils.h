@@ -127,21 +127,17 @@ template< unsigned Integer, unsigned Fraction >
 constexpr UFixed<Integer, Fraction> roundFixed(const UFixed<Integer, Fraction> & value)
 {
 	using OutputType = UFixed<Integer, Fraction>;
-	return (value.getInternal() & OutputType::MidpointMask) != 0 ? ceilFixed(value) : floorFixed(value);
+	return ((value.getFraction() >= OutputType(0.5).getFraction()) != 0) ? ceilFixed(value) : floorFixed(value);
 }
 
 template< unsigned Integer, unsigned Fraction >
 constexpr SFixed<Integer, Fraction> roundFixed(const SFixed<Integer, Fraction> & value)
 {
 	using OutputType = SFixed<Integer, Fraction>;
-	return
-		(
-			((value.getInternal() & OutputType::MidpointMask) != 0) &&
-			(!signbitFixed(value) ||
-			((value.getInternal() & OutputType::LesserMidpointMask) != 0))
-		)
-		? ceilFixed(value)
-		: floorFixed(value);
+	return		
+		signbitFixed(value)
+		? ((value.getFraction() <= OutputType(0.5).getFraction()) != 0) ? floorFixed(value) : ceilFixed(value)
+		: ((value.getFraction() >= OutputType(0.5).getFraction()) != 0) ? ceilFixed(value) : floorFixed(value);
 }
 
 template< unsigned Integer, unsigned Fraction >
