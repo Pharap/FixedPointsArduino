@@ -47,30 +47,6 @@ namespace FIXED_POINTS_DETAILS
 		constexpr static const auto Value = sizeof(T) * CHAR_BIT;
 	};
 
-	template< typename T, typename U = T >
-	constexpr auto Max(const T & left, const U & right) noexcept -> decltype((left > right) ? left : right)
-	{
-		return (left > right) ? left : right;
-	}
-	
-	template< typename T, T Left, T Right >
-	constexpr auto Max(void) noexcept -> decltype((Left > Right) ? Left : Right)
-	{
-		return (Left > Right) ? Left : Right;
-	}
-
-	template< typename T, typename U = T >
-	constexpr auto Min(const T & left, const U & right) noexcept -> decltype((left < right) ? left : right)
-	{
-		return (left < right) ? left : right;
-	}
-	
-	template< typename T, T Left, T Right >
-	constexpr auto Min(void) noexcept -> decltype((Left < Right) ? Left : Right)
-	{
-		return (Left < Right) ? Left : Right;
-	}
-
 	template< bool Condition, typename TTrue, typename TFalse >
 	struct Conditional;
 
