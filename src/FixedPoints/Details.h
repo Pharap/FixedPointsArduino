@@ -135,17 +135,6 @@ namespace FIXED_POINTS_DETAILS
 		IdentityMask(void) = delete;
 		constexpr const static LeastUInt<0> Value = 0;
 	};
-
-	using IntegerLiteral = decltype(0);
-	using IntegerLiteralU = decltype(0U);
-	using IntegerLiteralL = decltype(0L);
-	using IntegerLiteralUL = decltype(0UL);
-	using IntegerLiteralLL = decltype(0LL);
-	using IntegerLiteralULL = decltype(0ULL);
-
-	using DecimalLiteral = decltype(0.0);
-	using DecimalLiteralF = decltype(0.0F);
-	using DecimalLiteralL = decltype(0.0L);
 	
 #if !defined(FIXED_POINTS_NO_RANDOM)
 	template< typename T >

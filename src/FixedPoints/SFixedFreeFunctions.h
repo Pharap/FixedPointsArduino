@@ -275,15 +275,20 @@ constexpr auto operator /(const SFixed<IntegerLeft, FractionLeft> & left, const 
 	}
 	
 #define OPERATORS( opType, op ) \
-	opType##_OPERATOR( FIXED_POINTS_DETAILS::IntegerLiteral, op )\
-	opType##_OPERATOR( FIXED_POINTS_DETAILS::IntegerLiteralU, op )\
-	opType##_OPERATOR( FIXED_POINTS_DETAILS::IntegerLiteralL, op )\
-	opType##_OPERATOR( FIXED_POINTS_DETAILS::IntegerLiteralUL, op )\
-	opType##_OPERATOR( FIXED_POINTS_DETAILS::IntegerLiteralLL, op )\
-	opType##_OPERATOR( FIXED_POINTS_DETAILS::IntegerLiteralULL, op )\
-	opType##_OPERATOR( FIXED_POINTS_DETAILS::DecimalLiteral, op )\
-	opType##_OPERATOR( FIXED_POINTS_DETAILS::DecimalLiteralF, op )\
-	opType##_OPERATOR( FIXED_POINTS_DETAILS::DecimalLiteralL, op )
+	opType##_OPERATOR( char, op )\
+	opType##_OPERATOR( unsigned char, op )\
+	opType##_OPERATOR( signed char, op )\
+	opType##_OPERATOR( unsigned short int, op )\
+	opType##_OPERATOR( signed short int, op )\
+	opType##_OPERATOR( unsigned int, op )\
+	opType##_OPERATOR( signed int, op )\
+	opType##_OPERATOR( unsigned long int, op )\
+	opType##_OPERATOR( signed long int, op )\
+	opType##_OPERATOR( unsigned long long int, op )\
+	opType##_OPERATOR( signed long long int, op )\
+	opType##_OPERATOR( float, op )\
+	opType##_OPERATOR( double, op )\
+	opType##_OPERATOR( long double, op )
 	
 #define LOGIC_OPERATORS( op ) OPERATORS( LOGIC, op )
 #define ARITHMETIC_OPERATORS( op ) OPERATORS( ARITHMETIC, op )
