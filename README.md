@@ -7,6 +7,16 @@ No knowledge of how these operations are implemented is required to use them.
 This library was written with Arduino in mind, as well as CPUs with limited floating point support.
 However, given the templated nature of the library, it should still function on a wide variety of CPUs.
 
+## Project Showcase
+
+Here's a list of projects that use `FixedPoints`:
+
+* [1943](https://github.com/filmote/Nineteen43) for the [Arduboy](https://arduboy.com/) by [@filmote](https://github.com/filmote)
+* [XOD Powered Rechargeable Solar Lamp](http://www.instructables.com/id/XOD-powered-Rechargeable-Solar-Lamp/) by [Victorian DeLorean](http://www.instructables.com/member/Victorian%20DeLorean/)
+
+If you have a project that uses `FixedPoints` and would like your work to be showcased here,
+please [raise an issue](https://github.com/Pharap/FixedPointsArduino/issues/new).
+
 ## Requirements:
 
 - The Compiler must be C++11 compliant.
