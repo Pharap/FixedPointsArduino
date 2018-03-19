@@ -47,32 +47,47 @@ namespace FIXED_POINTS_DETAILS
 		constexpr UFixedBase(const RawType & value) : value(static_cast<InternalType>(value)) {}
 
 	public:
-		constexpr UFixedBase(const IntegerLiteral & value)
-			: value(static_cast<InternalType>(static_cast< LargerType<IntegerLiteral, InternalType> >(value) << Fraction)) {}
-			
-		constexpr UFixedBase(const IntegerLiteralU & value)
-			: value(static_cast<InternalType>(static_cast< LargerType<IntegerLiteralU, InternalType> >(value) << Fraction)) {}
-			
-		constexpr UFixedBase(const IntegerLiteralL & value)
-			: value(static_cast<InternalType>(static_cast< LargerType<IntegerLiteralL, InternalType> >(value) << Fraction)) {}
-			
-		constexpr UFixedBase(const IntegerLiteralUL & value)
-			: value(static_cast<InternalType>(static_cast< LargerType<IntegerLiteralUL, InternalType>>(value) << Fraction)) {}
-			
-		constexpr UFixedBase(const IntegerLiteralLL & value)
-			: value(static_cast<InternalType>(static_cast< LargerType<IntegerLiteralLL, InternalType>>(value) << Fraction)) {}
-			
-		constexpr UFixedBase(const IntegerLiteralULL & value)
-			: value(static_cast<InternalType>(static_cast< LargerType<IntegerLiteralULL, InternalType> >(value) << Fraction)) {}
-			
-		constexpr UFixedBase(const DecimalLiteral & value)
-			: value(static_cast<InternalType>(value * Scale)) {}
-			
-		constexpr UFixedBase(const DecimalLiteralF & value)
-			: value(static_cast<InternalType>(value * Scale)) {}
-			
-		constexpr UFixedBase(const DecimalLiteralL & value)
-			: value(static_cast<InternalType>(value * Scale)) {}
+		constexpr UFixedBase(const char & value)
+			: value(static_cast<InternalType>(static_cast< LargerType<char, InternalType> >(value) << Fraction)) {}
+
+		constexpr UFixedBase(const unsigned char & value)
+			: value(static_cast<InternalType>(static_cast< LargerType<unsigned char, InternalType> >(value) << Fraction)) {}
+
+		constexpr UFixedBase(const signed char & value)
+			: value(static_cast<InternalType>(static_cast< LargerType<signed char, InternalType> >(value) << Fraction)) {}
+
+		constexpr UFixedBase(const unsigned short int & value)
+			: value(static_cast<InternalType>(static_cast< LargerType<unsigned short int, InternalType> >(value) << Fraction)) {}
+
+		constexpr UFixedBase(const signed short int & value)
+			: value(static_cast<InternalType>(static_cast< LargerType<signed short int, InternalType> >(value) << Fraction)) {}
+
+		constexpr UFixedBase(const unsigned int & value)
+			: value(static_cast<InternalType>(static_cast< LargerType<unsigned int, InternalType> >(value) << Fraction)) {}
+
+		constexpr UFixedBase(const signed int & value)
+			: value(static_cast<InternalType>(static_cast< LargerType<signed int, InternalType> >(value) << Fraction)) {}
+
+		constexpr UFixedBase(const unsigned long int & value)
+			: value(static_cast<InternalType>(static_cast< LargerType<unsigned long int, InternalType> >(value) << Fraction)) {}
+
+		constexpr UFixedBase(const signed long int & value)
+			: value(static_cast<InternalType>(static_cast< LargerType<signed long int, InternalType> >(value) << Fraction)) {}
+
+		constexpr UFixedBase(const unsigned long long int & value)
+			: value(static_cast<InternalType>(static_cast< LargerType<unsigned long long int, InternalType> >(value) << Fraction)) {}
+
+		constexpr UFixedBase(const signed long long int & value)
+			: value(static_cast<InternalType>(static_cast< LargerType<signed long long int, InternalType> >(value) << Fraction)) {}
+
+		constexpr UFixedBase(const double & value)
+			: value(static_cast<InternalType>(value * static_cast<double>(Scale))) {}
+
+		constexpr UFixedBase(const float & value)
+			: value(static_cast<InternalType>(value * static_cast<float>(Scale))) {}
+
+		constexpr UFixedBase(const long double & value)
+			: value(static_cast<InternalType>(value * static_cast<long double>(Scale))) {}
 	};
 }
 FIXED_POINTS_END_NAMESPACE
