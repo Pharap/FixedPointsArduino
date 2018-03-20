@@ -20,7 +20,9 @@ FIXED_POINTS_BEGIN_NAMESPACE
 
 template< unsigned Integer, unsigned Fraction >
 constexpr SFixed<Integer * 2, Fraction * 2> multiply(const SFixed<Integer, Fraction> & left, const SFixed<Integer, Fraction> & right)
-{	
+{
+	static_assert(((Integer + 1) * 2 + Fraction * 2) <= FIXED_POINTS_DETAILS::BitSize<intmax_t>::Value, "Multiplication cannot be performed, the result type would be too large");	
+
 	using ResultType = SFixed<Integer * 2, Fraction * 2>;
 	using InternalType = typename ResultType::InternalType;
 	return ResultType::fromInternal(static_cast<InternalType>(static_cast<InternalType>(left.getInternal()) * static_cast<InternalType>(right.getInternal())));
@@ -169,6 +171,8 @@ constexpr SFixed<Integer, Fraction> operator -(const SFixed<Integer, Fraction> &
 template< unsigned Integer, unsigned Fraction >
 constexpr SFixed<Integer, Fraction> operator *(const SFixed<Integer, Fraction> & left, const SFixed<Integer, Fraction> & right)
 {
+	static_assert(((Integer + 1) * 2 + Fraction * 2) <= FIXED_POINTS_DETAILS::BitSize<intmax_t>::Value, "Multiplication cannot be performed, the intermediary type would be too large");	
+	
 	using InternalType = typename SFixed<Integer, Fraction>::InternalType;
 	using PrecisionType = typename SFixed<Integer * 2, Fraction * 2>::InternalType;
 	return SFixed<Integer, Fraction>::fromInternal(static_cast<InternalType>((static_cast<PrecisionType>(left.getInternal()) * static_cast<PrecisionType>(right.getInternal())) >> Fraction));
