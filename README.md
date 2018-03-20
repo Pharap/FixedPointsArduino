@@ -45,6 +45,11 @@ These are symbols you can define prior to library inclusion to alter the behavio
 - `FIXED_POINTS_USE_NAMESPACE`: Define this to wrap all classes and functions in the namespace `FixedPoints`. Useful for preventing naming conflicts.
 - `FIXED_POINTS_NO_RANDOM`: Define this to disable the random utility functions. Useful for systems that don't have access to `long random(void)` from avr-libc.
 
+## FAQ
+
+* Why can't I multiply `UQ32x32` or `SQ31x32` by another type?
+  * Because it would require a 128-bit integer type to provide enough precision for accurate multiplication.
+
 ## Contents
 This library supplies two core types and sixteen type aliases.
 
