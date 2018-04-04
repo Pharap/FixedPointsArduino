@@ -71,7 +71,7 @@ constexpr SFixed<Integer, Fraction>::operator IntegerType(void) const
 template< unsigned Integer, unsigned Fraction >
 constexpr SFixed<Integer, Fraction>::operator float(void) const
 {
-	return (1.0f / Scale) *
+	return (1.0F / Scale) *
 	static_cast<InternalType>
 	((this->value & IdentityMask) |
 	((this->value < 0) ? ~IdentityMask : 0));
@@ -81,6 +81,15 @@ template< unsigned Integer, unsigned Fraction >
 constexpr SFixed<Integer, Fraction>::operator double(void) const
 {
 	return (1.0 / Scale) *
+	static_cast<InternalType>
+	((this->value & IdentityMask) |
+	((this->value < 0) ? ~IdentityMask : 0));
+}
+
+template< unsigned Integer, unsigned Fraction >
+constexpr SFixed<Integer, Fraction>::operator long double(void) const
+{
+	return (1.0L / Scale) *
 	static_cast<InternalType>
 	((this->value & IdentityMask) |
 	((this->value < 0) ? ~IdentityMask : 0));

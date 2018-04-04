@@ -74,6 +74,7 @@ public:
 	constexpr explicit operator IntegerType(void) const;
 	constexpr explicit operator float(void) const;
 	constexpr explicit operator double(void) const;
+	constexpr explicit operator long double(void) const;
 
 	template< unsigned IntegerOut, unsigned FractionOut >
 	constexpr explicit operator UFixed<IntegerOut, FractionOut>(void) const;

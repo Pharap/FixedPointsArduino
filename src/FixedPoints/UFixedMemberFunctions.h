@@ -71,13 +71,19 @@ constexpr UFixed<Integer, Fraction>::operator IntegerType(void) const
 template< unsigned Integer, unsigned Fraction >
 constexpr UFixed<Integer, Fraction>::operator float(void) const
 {
-	return ((this->value & IdentityMask) * (1.0f / Scale));
+	return ((this->value & IdentityMask) * (1.0F / Scale));
 }
 
 template< unsigned Integer, unsigned Fraction >
 constexpr UFixed<Integer, Fraction>::operator double(void) const
 {
 	return ((this->value & IdentityMask) * (1.0 / Scale));
+}
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction>::operator long double(void) const
+{
+	return ((this->value & IdentityMask) * (1.0L / Scale));
 }
 
 template< unsigned Integer, unsigned Fraction >
