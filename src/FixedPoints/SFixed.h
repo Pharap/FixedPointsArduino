@@ -15,7 +15,6 @@
 #pragma once
 
 #include "Details.h"
-#include "SFixedBase.h"
 
 FIXED_POINTS_BEGIN_NAMESPACE
 
@@ -24,7 +23,7 @@ FIXED_POINTS_BEGIN_NAMESPACE
 //
 
 template< unsigned Integer, unsigned Fraction >
-class SFixed : FIXED_POINTS_DETAILS::SFixedBase< Integer, Fraction >
+class SFixed
 {
 public:
 	static_assert(((Integer + 1) + Fraction) <= FIXED_POINTS_DETAILS::BitSize<intmax_t>::Value, "Platform does not have a native type large enough for SFixed.");
@@ -55,16 +54,41 @@ public:
 	
 	constexpr const static MaskType MidpointMask = FIXED_POINTS_DETAILS::MsbMask<FractionSize>::Value;
 	constexpr const static MaskType LesserMidpointMask = MidpointMask - 1;
-	
-private:
-	using Base = FIXED_POINTS_DETAILS::SFixedBase<Integer, Fraction>;
-	using RawType = typename Base::RawType;
+
+protected:
+	class RawType
+	{
+	private:
+		const InternalType value;
+
+	public:
+		constexpr inline explicit RawType(const InternalType & value) : value(value) {}
+		constexpr inline explicit operator InternalType(void) const { return this->value; }
+	};
+
+protected:
+	InternalType value;
+
+protected:
+	constexpr SFixed(const RawType & value);
 
 public:
-	using Base::Base;
-
 	constexpr SFixed(void);
 	constexpr SFixed(const IntegerType & integer, const FractionType & fraction);
+	constexpr SFixed(const char & value);
+	constexpr SFixed(const unsigned char & value);
+	constexpr SFixed(const signed char & value);
+	constexpr SFixed(const unsigned short int & value);
+	constexpr SFixed(const signed short int & value);
+	constexpr SFixed(const unsigned int & value);
+	constexpr SFixed(const signed int & value);
+	constexpr SFixed(const unsigned long int & value);
+	constexpr SFixed(const signed long int & value);
+	constexpr SFixed(const unsigned long long int & value);
+	constexpr SFixed(const signed long long int & value);
+	constexpr SFixed(const double & value);
+	constexpr SFixed(const float & value);
+	constexpr SFixed(const long double & value);
 
 	constexpr InternalType getInternal(void) const;
 	constexpr IntegerType getInteger(void) const;

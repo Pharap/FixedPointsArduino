@@ -15,7 +15,6 @@
 #pragma once
 
 #include "Details.h"
-#include "UFixedBase.h"
 
 FIXED_POINTS_BEGIN_NAMESPACE
 
@@ -24,7 +23,7 @@ FIXED_POINTS_BEGIN_NAMESPACE
 //
 
 template< unsigned Integer, unsigned Fraction >
-class UFixed : FIXED_POINTS_DETAILS::UFixedBase< Integer, Fraction >
+class UFixed
 {
 public:
 	static_assert((Integer + Fraction) <= FIXED_POINTS_DETAILS::BitSize<uintmax_t>::Value, "Platform does not have a native type large enough for UFixed.");
@@ -56,16 +55,42 @@ public:
 	constexpr const static MaskType MidpointMask = FIXED_POINTS_DETAILS::MsbMask<FractionSize>::Value;
 	constexpr const static MaskType LesserMidpointMask = MidpointMask - 1;
 
-private:
-	using Base = FIXED_POINTS_DETAILS::UFixedBase<Integer, Fraction>;
-	using RawType = typename Base::RawType;
+protected:
+	class RawType
+	{
+	private:
+		const InternalType value;
 
+	public:
+		constexpr inline explicit RawType(const InternalType & value) : value(value) {}
+		constexpr inline explicit operator InternalType(void) const { return this->value; }
+	};
+
+protected:
+	InternalType value;
+
+protected:
+	constexpr UFixed(const RawType & value);
+	
 public:
-	using Base::Base;
-
 	constexpr UFixed(void);
 	constexpr UFixed(const IntegerType & integer, const FractionType & fraction);
-
+	constexpr UFixed(const char & value);
+	constexpr UFixed(const unsigned char & value);
+	constexpr UFixed(const signed char & value);
+	constexpr UFixed(const unsigned short int & value);
+	constexpr UFixed(const signed short int & value);
+	constexpr UFixed(const unsigned int & value);
+	constexpr UFixed(const signed int & value);
+	constexpr UFixed(const unsigned long int & value);
+	constexpr UFixed(const signed long int & value);
+	constexpr UFixed(const unsigned long long int & value);
+	constexpr UFixed(const signed long long int & value);
+	constexpr UFixed(const double & value);
+	constexpr UFixed(const float & value);
+	constexpr UFixed(const long double & value);
+	
+public:
 	constexpr InternalType getInternal(void) const;
 	constexpr IntegerType getInteger(void) const;
 	constexpr FractionType getFraction(void) const;
