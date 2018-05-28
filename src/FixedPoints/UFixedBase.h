@@ -23,7 +23,7 @@ namespace FIXED_POINTS_DETAILS
 	class UFixedBase
 	{
 	public:
-		using IntegerType = FIXED_POINTS_DETAILS::LeastInt<Integer + 1>;
+		using IntegerType = FIXED_POINTS_DETAILS::LeastUInt<Integer>;
 		using FractionType = FIXED_POINTS_DETAILS::LeastUInt<Fraction>;
 		using InternalType = FIXED_POINTS_DETAILS::LeastUInt<Integer + Fraction>;
 
