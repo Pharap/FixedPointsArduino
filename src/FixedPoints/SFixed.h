@@ -64,7 +64,6 @@ public:
 	using Base::Base;
 
 	constexpr SFixed(void);
-	constexpr SFixed(const IntegerType & integer);
 	constexpr SFixed(const IntegerType & integer, const FractionType & fraction);
 
 	constexpr InternalType getInternal(void) const;
