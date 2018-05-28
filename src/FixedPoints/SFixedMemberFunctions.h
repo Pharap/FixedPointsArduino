@@ -25,12 +25,6 @@ constexpr SFixed<Integer, Fraction>::SFixed(void)
 }
 
 template< unsigned Integer, unsigned Fraction >
-constexpr SFixed<Integer, Fraction>::SFixed(const IntegerType & integer)
-	: Base(RawType(static_cast<InternalType>(integer) << FractionSize))
-{
-}
-
-template< unsigned Integer, unsigned Fraction >
 constexpr SFixed<Integer, Fraction>::SFixed(const IntegerType & integer, const FractionType & fraction)
 	: Base(RawType((static_cast<InternalType>(integer) << FractionSize) | fraction))
 {
