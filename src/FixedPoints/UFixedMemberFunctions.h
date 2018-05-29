@@ -19,14 +19,104 @@ FIXED_POINTS_BEGIN_NAMESPACE
 //
 
 template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction>::UFixed(const RawType & value)
+	: value(static_cast<InternalType>(value))
+{
+}
+
+template< unsigned Integer, unsigned Fraction >
 constexpr UFixed<Integer, Fraction>::UFixed(void)
-	: Base()
+	: value(0)
 {
 }
 
 template< unsigned Integer, unsigned Fraction >
 constexpr UFixed<Integer, Fraction>::UFixed(const IntegerType & integer, const FractionType & fraction)
-	: Base(RawType((static_cast<InternalType>(integer) << FractionSize) | fraction))
+	: value((static_cast<InternalType>(integer) << FractionSize) | fraction)
+{
+}
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction>::UFixed(const char & value)
+	: value(static_cast<InternalType>(static_cast< FIXED_POINTS_DETAILS::LargerType<char, InternalType> >(value) << FractionSize))
+{
+}
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction>::UFixed(const unsigned char & value)
+	: value(static_cast<InternalType>(static_cast< FIXED_POINTS_DETAILS::LargerType<unsigned char, InternalType> >(value) << FractionSize))
+{
+}
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction>::UFixed(const signed char & value)
+	: value(static_cast<InternalType>(static_cast< FIXED_POINTS_DETAILS::LargerType<signed char, InternalType> >(value) << FractionSize))
+{
+}
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction>::UFixed(const unsigned short int & value)
+	: value(static_cast<InternalType>(static_cast< FIXED_POINTS_DETAILS::LargerType<unsigned short int, InternalType> >(value) << FractionSize))
+{
+}
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction>::UFixed(const signed short int & value)
+	: value(static_cast<InternalType>(static_cast< FIXED_POINTS_DETAILS::LargerType<signed short int, InternalType> >(value) << FractionSize))
+{
+}
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction>::UFixed(const unsigned int & value)
+	: value(static_cast<InternalType>(static_cast< FIXED_POINTS_DETAILS::LargerType<unsigned int, InternalType> >(value) << FractionSize))
+{
+}
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction>::UFixed(const signed int & value)
+	: value(static_cast<InternalType>(static_cast< FIXED_POINTS_DETAILS::LargerType<signed int, InternalType> >(value) << FractionSize))
+{
+}
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction>::UFixed(const unsigned long int & value)
+	: value(static_cast<InternalType>(static_cast< FIXED_POINTS_DETAILS::LargerType<unsigned long int, InternalType> >(value) << FractionSize))
+{
+}
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction>::UFixed(const signed long int & value)
+	: value(static_cast<InternalType>(static_cast< FIXED_POINTS_DETAILS::LargerType<signed long int, InternalType> >(value) << FractionSize))
+{
+}
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction>::UFixed(const unsigned long long int & value)
+	: value(static_cast<InternalType>(static_cast< FIXED_POINTS_DETAILS::LargerType<unsigned long long int, InternalType> >(value) << FractionSize))
+{
+}
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction>::UFixed(const signed long long int & value)
+	: value(static_cast<InternalType>(static_cast< FIXED_POINTS_DETAILS::LargerType<signed long long int, InternalType> >(value) << FractionSize))
+{
+}
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction>::UFixed(const double & value)
+	: value(static_cast<InternalType>(value * static_cast<double>(Scale)))
+{
+}
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction>::UFixed(const float & value)
+	: value(static_cast<InternalType>(value * static_cast<float>(Scale)))
+{
+}
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction>::UFixed(const long double & value)
+	: value(static_cast<InternalType>(value * static_cast<long double>(Scale)))
 {
 }
 
