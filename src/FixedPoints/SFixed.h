@@ -36,12 +36,12 @@ public:
 	using ShiftType = FIXED_POINTS_DETAILS::LeastUInt<(Integer + 1) + Fraction>;
 	using MaskType = FIXED_POINTS_DETAILS::LeastUInt<(Integer + 1) + Fraction>;
 
-	constexpr const static unsigned IntegerSize = Integer + 1;
-	constexpr const static unsigned FractionSize = Fraction;
-	constexpr const static unsigned LogicalSize = IntegerSize + FractionSize;
-	constexpr const static unsigned InternalSize = FIXED_POINTS_DETAILS::BitSize<InternalType>::Value;	
+	constexpr const static uintmax_t IntegerSize = Integer + 1;
+	constexpr const static uintmax_t FractionSize = Fraction;
+	constexpr const static uintmax_t LogicalSize = IntegerSize + FractionSize;
+	constexpr const static uintmax_t InternalSize = FIXED_POINTS_DETAILS::BitSize<InternalType>::Value;	
 	
-	constexpr const static unsigned long long Scale = 1ULL << FractionSize;
+	constexpr const static uintmax_t Scale = 1ULL << FractionSize;
 	
 public:
 	constexpr const static ShiftType IntegerShift = FractionSize;
