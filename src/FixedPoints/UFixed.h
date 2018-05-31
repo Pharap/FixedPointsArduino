@@ -41,7 +41,7 @@ public:
 	constexpr const static uintmax_t LogicalSize = IntegerSize + FractionSize;
 	constexpr const static uintmax_t InternalSize = FIXED_POINTS_DETAILS::BitSize<InternalType>::Value;
 	
-	constexpr const static uintmax_t Scale = 1ULL << FractionSize;
+	constexpr const static uintmax_t Scale = UINTMAX_C(1) << FractionSize;
 	
 public:
 	constexpr const static ShiftType IntegerShift = FractionSize;
