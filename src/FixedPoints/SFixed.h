@@ -26,23 +26,24 @@ template< unsigned Integer, unsigned Fraction >
 class SFixed
 {
 public:
-	static_assert(((Integer + 1) + Fraction) <= FIXED_POINTS_DETAILS::BitSize<intmax_t>::Value, "Platform does not have a native type large enough for SFixed.");
-
-public:
-	using IntegerType = FIXED_POINTS_DETAILS::LeastInt<Integer + 1>;
-	using FractionType = FIXED_POINTS_DETAILS::LeastUInt<Fraction>;
-	using InternalType = FIXED_POINTS_DETAILS::LeastInt<(Integer + 1) + Fraction>;
-	
-	using ShiftType = FIXED_POINTS_DETAILS::LeastUInt<(Integer + 1) + Fraction>;
-	using MaskType = FIXED_POINTS_DETAILS::LeastUInt<(Integer + 1) + Fraction>;
-
 	constexpr const static uintmax_t IntegerSize = Integer + 1;
 	constexpr const static uintmax_t FractionSize = Fraction;
 	constexpr const static uintmax_t LogicalSize = IntegerSize + FractionSize;
-	constexpr const static uintmax_t InternalSize = FIXED_POINTS_DETAILS::BitSize<InternalType>::Value;	
-	
 	constexpr const static uintmax_t Scale = UINTMAX_C(1) << FractionSize;
+
+public:
+	static_assert(LogicalSize <= FIXED_POINTS_DETAILS::BitSize<intmax_t>::Value, "Platform does not have a native type large enough for SFixed.");
+
+public:
+	using IntegerType = FIXED_POINTS_DETAILS::LeastInt<IntegerSize>;
+	using FractionType = FIXED_POINTS_DETAILS::LeastUInt<FractionSize>;
+	using InternalType = FIXED_POINTS_DETAILS::LeastInt<LogicalSize>;
+
+	constexpr const static uintmax_t InternalSize = FIXED_POINTS_DETAILS::BitSize<InternalType>::Value;
 	
+	using ShiftType = FIXED_POINTS_DETAILS::LeastUInt<LogicalSize>;
+	using MaskType = FIXED_POINTS_DETAILS::LeastUInt<LogicalSize>;
+		
 public:
 	constexpr const static ShiftType IntegerShift = FractionSize;
 	constexpr const static ShiftType FractionShift = 0;
