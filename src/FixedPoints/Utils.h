@@ -135,9 +135,9 @@ constexpr SFixed<Integer, Fraction> roundFixed(const SFixed<Integer, Fraction> &
 {
 	using OutputType = SFixed<Integer, Fraction>;
 	return		
-		signbitFixed(value)
-		? (value.getFraction() <= OutputType(0.5).getFraction()) ? floorFixed(value) : ceilFixed(value)
-		: (value.getFraction() >= OutputType(0.5).getFraction()) ? ceilFixed(value) : floorFixed(value);
+		signbitFixed(value) ?
+		((value.getFraction() <= OutputType(0.5).getFraction()) ? floorFixed(value) : ceilFixed(value)) :
+		((value.getFraction() >= OutputType(0.5).getFraction()) ? ceilFixed(value) : floorFixed(value));
 }
 
 template< unsigned Integer, unsigned Fraction >
@@ -182,7 +182,7 @@ constexpr SFixed<Integer, Fraction> nextafterFixed(const SFixed<Integer, Fractio
 		(from < to) ?
 		ResultType::fromInternal(from.getInternal() + 1) :
 		(from > to) ?
-		ResultType::fromInternal(from.getInternal() - 1):
+		ResultType::fromInternal(from.getInternal() - 1) :
 		to;
 }
 
@@ -194,7 +194,7 @@ constexpr UFixed<Integer, Fraction> nextafterFixed(const UFixed<Integer, Fractio
 		(from < to) ?
 		ResultType::fromInternal(from.getInternal() + 1) :
 		(from > to) ?
-		ResultType::fromInternal(from.getInternal() - 1):
+		ResultType::fromInternal(from.getInternal() - 1) :
 		to;
 }
 
