@@ -17,4 +17,7 @@
 #include "UFixed.h"
 #include "SFixed.h"
 
+#include "UFixed0.h"
+#include "SFixed0.h"
+
 #include "Utils.h"
