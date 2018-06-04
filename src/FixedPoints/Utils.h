@@ -153,7 +153,7 @@ constexpr SFixed<Integer, Fraction> roundFixed(const SFixed<Integer, Fraction> &
 {
 	using OutputType = SFixed<Integer, Fraction>;
 	return		
-		signbitFixed(value)
+		signbitFixed(value) ?
 		((value.getFraction() <= OutputType(0.5).getFraction()) ? floorFixed(value) : ceilFixed(value)) :
 		((value.getFraction() >= OutputType(0.5).getFraction()) ? ceilFixed(value) : floorFixed(value));
 }
