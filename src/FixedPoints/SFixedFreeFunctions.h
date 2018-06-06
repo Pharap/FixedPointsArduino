@@ -278,43 +278,46 @@ constexpr auto operator /(const SFixed<IntegerLeft, FractionLeft> & left, const 
 		return (SFixed<Integer, Fraction>(left) op right);\
 	}
 	
-#define OPERATORS( opType, op ) \
-	opType##_OPERATOR( char, op )\
-	opType##_OPERATOR( unsigned char, op )\
-	opType##_OPERATOR( signed char, op )\
-	opType##_OPERATOR( unsigned short int, op )\
-	opType##_OPERATOR( signed short int, op )\
-	opType##_OPERATOR( unsigned int, op )\
-	opType##_OPERATOR( signed int, op )\
-	opType##_OPERATOR( unsigned long int, op )\
-	opType##_OPERATOR( signed long int, op )\
-	opType##_OPERATOR( unsigned long long int, op )\
-	opType##_OPERATOR( signed long long int, op )\
-	opType##_OPERATOR( float, op )\
-	opType##_OPERATOR( double, op )\
-	opType##_OPERATOR( long double, op )
-	
-#define LOGIC_OPERATORS( op ) OPERATORS( LOGIC, op )
-#define ARITHMETIC_OPERATORS( op ) OPERATORS( ARITHMETIC, op )
+#define LOGIC_OPERATORS( type )\
+	LOGIC_OPERATOR( type, == )\
+	LOGIC_OPERATOR( type, != )\
+	LOGIC_OPERATOR( type, < )\
+	LOGIC_OPERATOR( type, <= )\
+	LOGIC_OPERATOR( type, > )\
+	LOGIC_OPERATOR( type, >= )
+			
+#define ARITHMETIC_OPERATORS( type ) \
+	ARITHMETIC_OPERATOR( type, + )\
+	ARITHMETIC_OPERATOR( type, - )\
+	ARITHMETIC_OPERATOR( type, * )\
+	ARITHMETIC_OPERATOR( type, / )
+		
+#define OPERATORS( type ) \
+	LOGIC_OPERATORS( type )\
+	ARITHMETIC_OPERATORS( type )
 
-LOGIC_OPERATORS( == )
-LOGIC_OPERATORS( != )
-LOGIC_OPERATORS( < )
-LOGIC_OPERATORS( > )
-LOGIC_OPERATORS( <= )
-LOGIC_OPERATORS( >= )
+OPERATORS( float )
+OPERATORS( double )
+OPERATORS( long double )
 
-ARITHMETIC_OPERATORS( + )
-ARITHMETIC_OPERATORS( - )
-ARITHMETIC_OPERATORS( * )
-ARITHMETIC_OPERATORS( / )
+OPERATORS( char )
+OPERATORS( unsigned char )
+OPERATORS( signed char )
+OPERATORS( unsigned short int )
+OPERATORS( signed short int )
+OPERATORS( unsigned int )
+OPERATORS( signed int )
+OPERATORS( unsigned long int )
+OPERATORS( signed long int )
+OPERATORS( unsigned long long int )
+OPERATORS( signed long long int )
 
 // Prevent Macro-bleed:
 
-#undef LOGIC_OPERATOR
-#undef ARITHMETIC_OPERATOR
 #undef OPERATORS
-#undef LOGIC_OPERATORS
 #undef ARITHMETIC_OPERATORS
+#undef LOGIC_OPERATORS
+#undef ARITHMETIC_OPERATOR
+#undef LOGIC_OPERATOR
 
 FIXED_POINTS_END_NAMESPACE
