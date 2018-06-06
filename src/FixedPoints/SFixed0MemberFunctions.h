@@ -68,8 +68,8 @@ constexpr typename SFixed<0, Fraction>::InternalType SFixed<0, Fraction>::getInt
 template<  unsigned Fraction >
 constexpr typename SFixed<0, Fraction>::IntegerType SFixed<0, Fraction>::getInteger(void) const
 {
-	static_assert(false, "UNDEFINED BEHAVIOUR");
-	//return (static_cast<IntegerType>(this->value >> IntegerShift) & IntegerMask) | ((this->value < 0) ? ~IntegerMask : 0);
+	//static_assert(false, "UNDEFINED BEHAVIOUR");
+	return (static_cast<IntegerType>(this->value >> IntegerShift) & IntegerMask) | ((this->value < 0) ? ~IntegerMask : 0);
 }
 
 template<  unsigned Fraction >
@@ -172,7 +172,7 @@ template<  unsigned Fraction >
 SFixed<0, Fraction> & SFixed<0, Fraction>::operator *=(const SFixed<0, Fraction> & other)
 {
 	using InternalType = typename SFixed<0, Fraction>::InternalType;
-	using PrecisionType = typename SFixed<Integer * 2, Fraction * 2>::InternalType;
+	using PrecisionType = typename SFixed<0, Fraction * 2>::InternalType;
 	const PrecisionType temp = (static_cast<PrecisionType>(this->value) * static_cast<PrecisionType>(other.value)) >> Fraction;
 	this->value = static_cast<InternalType>(temp);
 	return *this;
@@ -182,7 +182,7 @@ template<  unsigned Fraction >
 SFixed<0, Fraction> & SFixed<0, Fraction>::operator /=(const SFixed<0, Fraction> & other)
 {
 	using InternalType = typename SFixed<0, Fraction>::InternalType;
-	using PrecisionType = typename SFixed<Integer * 2, Fraction * 2>::InternalType;
+	using PrecisionType = typename SFixed<0, Fraction * 2>::InternalType;
 	const PrecisionType temp = (static_cast<PrecisionType>(this->value) << Fraction) / static_cast<PrecisionType>(other.value);
 	this->value = static_cast<InternalType>(temp);
 	return *this;
