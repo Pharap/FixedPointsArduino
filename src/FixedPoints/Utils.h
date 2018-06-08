@@ -103,6 +103,12 @@ constexpr UFixed<Integer, Fraction> floorFixed(const UFixed<Integer, Fraction> &
 	return OutputType::fromInternal(static_cast<InternalType>(value.getInternal() & ~OutputType::FractionMask));
 }
 
+template< unsigned Fraction >
+constexpr UFixed<0, Fraction> floorFixed(const UFixed<0, Fraction> & value)
+{
+	return UFixed<0, Fraction>(0, 0);
+}
+
 template< unsigned Integer, unsigned Fraction >
 constexpr SFixed<Integer, Fraction> floorFixed(const SFixed<Integer, Fraction> & value)
 {
@@ -117,6 +123,12 @@ constexpr UFixed<Integer, Fraction> ceilFixed(const UFixed<Integer, Fraction> & 
 	return UFixed<Integer, Fraction>((value.getFraction() == 0) ? value.getInteger() : (value.getInteger() + 1), 0);
 }
 
+template< unsigned Fraction >
+constexpr UFixed<0, Fraction> ceilFixed(const UFixed<0, Fraction> & value)
+{
+	return UFixed<0, Fraction>(0, 0);
+}
+
 template< unsigned Integer, unsigned Fraction >
 constexpr SFixed<Integer, Fraction> ceilFixed(const SFixed<Integer, Fraction> & value)
 {
@@ -128,6 +140,12 @@ constexpr UFixed<Integer, Fraction> roundFixed(const UFixed<Integer, Fraction> &
 {
 	using OutputType = UFixed<Integer, Fraction>;
 	return (value.getFraction() >= OutputType(0.5).getFraction()) ? ceilFixed(value) : floorFixed(value);
+}
+
+template< unsigned Fraction >
+constexpr UFixed<0, Fraction> roundFixed(const UFixed<0, Fraction> & value)
+{
+	return UFixed<0, Fraction>(0, 0);
 }
 
 template< unsigned Integer, unsigned Fraction >
@@ -144,6 +162,12 @@ template< unsigned Integer, unsigned Fraction >
 constexpr UFixed<Integer, Fraction> truncFixed(const UFixed<Integer, Fraction> & value)
 {
 	return UFixed<Integer, Fraction>(value.getInteger(), 0);
+}
+
+template< unsigned Fraction >
+constexpr UFixed<0, Fraction> truncFixed(const UFixed<0, Fraction> & value)
+{
+	return UFixed<0, Fraction>(0, 0);
 }
 
 template< unsigned Integer, unsigned Fraction >
