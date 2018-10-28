@@ -27,16 +27,25 @@ please [raise an issue](https://github.com/Pharap/FixedPointsArduino/issues/new)
 This code uses the Apache 2.0 Licence.
 This means:
 
-- This code comes with no warranty.
-- The licensor and any contributors cannot be held liable for damages.
-- If you use this code, edited or unedited, you must:
-  - Package a copy of LICENCE with your code.
-  - Package a copy of NOTICE with your code.
-- You may modify the source code.
-  - If you modify a file, you must state this prominently in the file (i.e. in a comment at the top).
-  - Any modified code may use a different licence.
-  - Any unmodified code must carry the same Apache 2.0 licence.
-- You may not use any trademarks owned by the licensor.
+- This code comes with _no warranty_.
+  - The licensor and any contributors **cannot** be held liable for damages.
+- If you use this code, modified or unmodified:
+  - You **must** package a copy of LICENCE with your code.
+  - You **must** package a copy of NOTICE with your code.
+  - You are not required to distribute the source code.
+- You **must not** use any trademarks owned by the licensor.
+  - Unless you have specific permission to do so.
+- You **may** modify the source code.
+  - If you modify the code, you **must** state this fact prominently within the source file.
+    - E.g. in a comment at the top of the source file.
+  - You are under no obligation to distribute the source code of your modifications.
+- You may incorporate any part of the code into another project.
+  - That project **may** use a different licence.
+  - That code **must** retain the Apache 2.0 licence notice, including the copyright notice.
+  - If the code is modified, the modifications **may** be published under a different licence.
+    - The Apache 2.0 licence still applies to unmodified portions.
+    - The copyright and licence notices for the unmodified portions **must** still be prominently displayed.
+    - It is advised that you do not do this, as it is highly unusual and untested in court.
 
 ## Conditional Compilation
 
