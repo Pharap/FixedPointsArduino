@@ -13,6 +13,7 @@ Here's a list of projects that use `FixedPoints`:
 
 * [1943](https://github.com/filmote/Nineteen43) for the [Arduboy](https://arduboy.com/) by [@filmote](https://github.com/filmote)
 * [XOD Powered Rechargeable Solar Lamp](http://www.instructables.com/id/XOD-powered-Rechargeable-Solar-Lamp/) by [Victorian DeLorean](http://www.instructables.com/member/Victorian%20DeLorean/)
+* [Pod Manager](https://github.com/felipemanga/PodManager) for the [Arduboy](https://arduboy.com/) by [@felipemanga](https://github.com/felipemanga)
 
 If you have a project that uses `FixedPoints` and would like your work to be showcased here,
 please [raise an issue](https://github.com/Pharap/FixedPointsArduino/issues/new).
