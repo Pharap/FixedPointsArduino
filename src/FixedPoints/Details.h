@@ -43,7 +43,7 @@ namespace FIXED_POINTS_DETAILS
 	template< typename T >
 	struct BitSize
 	{
-		BitSize(void) = delete;
+		BitSize() = delete;
 		constexpr static const auto Value = sizeof(T) * CHAR_BIT;
 	};
 
@@ -77,14 +77,14 @@ namespace FIXED_POINTS_DETAILS
 	template< unsigned Bits, typename T, typename... Ts >
 	struct LeastTypeHelper<Bits, T, Ts... >
 	{
-		LeastTypeHelper(void) = delete;
+		LeastTypeHelper() = delete;
 		using Type = ConditionalT<(Bits <= BitSize<T>::Value), T, typename LeastTypeHelper<Bits, Ts...>::Type>;
 	};
 
 	template< unsigned Bits >
 	struct LeastTypeHelper<Bits>
 	{
-		LeastTypeHelper(void) = delete;
+		LeastTypeHelper() = delete;
 		using Type = void;
 	};
 
@@ -96,7 +96,7 @@ namespace FIXED_POINTS_DETAILS
 	struct LeastUIntDef
 	{
 		static_assert(Bits <= BitSize<uintmax_t>::Value, "No type large enough");
-		LeastUIntDef(void) = delete;
+		LeastUIntDef() = delete;
 		using Type = LeastType<Bits, uint_least8_t, uint_least16_t, uint_least32_t, uint_least64_t, uintmax_t>;
 	};
 	
@@ -108,7 +108,7 @@ namespace FIXED_POINTS_DETAILS
 	struct LeastIntDef
 	{
 		static_assert(Bits <= BitSize<intmax_t>::Value, "No type large enough");
-		LeastIntDef(void) = delete;
+		LeastIntDef() = delete;
 		using Type = LeastType<Bits, int_least8_t, int_least16_t, int_least32_t, int_least64_t, intmax_t>;
 	};
 
@@ -118,21 +118,21 @@ namespace FIXED_POINTS_DETAILS
 	template< unsigned Bits >
 	struct MsbMask
 	{
-		MsbMask(void) = delete;
+		MsbMask() = delete;
 		constexpr const static LeastUInt<Bits> Value = (1ull << (Bits - 1));
 	};
 
 	template< unsigned Bits >
 	struct IdentityMask
 	{
-		IdentityMask(void) = delete;
+		IdentityMask() = delete;
 		constexpr const static LeastUInt<Bits> Value = 1 | (IdentityMask<Bits - 1>::Value << 1);
 	};
 
 	template<>
 	struct IdentityMask<0>
 	{
-		IdentityMask(void) = delete;
+		IdentityMask() = delete;
 		constexpr const static LeastUInt<0> Value = 0;
 	};
 	

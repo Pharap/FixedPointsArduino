@@ -64,7 +64,7 @@ protected:
 
 	public:
 		constexpr inline explicit RawType(const InternalType & value) : value(value) {}
-		constexpr inline explicit operator InternalType(void) const { return this->value; }
+		constexpr inline explicit operator InternalType() const { return this->value; }
 	};
 
 protected:
@@ -74,7 +74,7 @@ protected:
 	constexpr UFixed(const RawType & value);
 	
 public:
-	constexpr UFixed(void);
+	constexpr UFixed();
 	constexpr UFixed(const IntegerType & integer, const FractionType & fraction);
 	constexpr UFixed(const char & value);
 	constexpr UFixed(const unsigned char & value);
@@ -92,22 +92,22 @@ public:
 	constexpr UFixed(const long double & value);
 	
 public:
-	constexpr InternalType getInternal(void) const;
-	constexpr IntegerType getInteger(void) const;
-	constexpr FractionType getFraction(void) const;
+	constexpr InternalType getInternal() const;
+	constexpr IntegerType getInteger() const;
+	constexpr FractionType getFraction() const;
 
-	constexpr explicit operator IntegerType(void) const;
-	constexpr explicit operator float(void) const;
-	constexpr explicit operator double(void) const;
-	constexpr explicit operator long double(void) const;
+	constexpr explicit operator IntegerType() const;
+	constexpr explicit operator float() const;
+	constexpr explicit operator double() const;
+	constexpr explicit operator long double() const;
 
 	template< unsigned IntegerOut, unsigned FractionOut >
-	constexpr explicit operator UFixed<IntegerOut, FractionOut>(void) const;
+	constexpr explicit operator UFixed<IntegerOut, FractionOut>() const;
 
 	constexpr static UFixed fromInternal(const InternalType & value);
 
-	UFixed & operator ++(void);
-	UFixed & operator --(void);
+	UFixed & operator ++();
+	UFixed & operator --();
 	UFixed & operator +=(const UFixed & other);
 	UFixed & operator -=(const UFixed & other);
 	UFixed & operator *=(const UFixed & other);

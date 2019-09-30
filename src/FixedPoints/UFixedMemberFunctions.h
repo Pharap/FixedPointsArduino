@@ -25,7 +25,7 @@ constexpr UFixed<Integer, Fraction>::UFixed(const RawType & value)
 }
 
 template< unsigned Integer, unsigned Fraction >
-constexpr UFixed<Integer, Fraction>::UFixed(void)
+constexpr UFixed<Integer, Fraction>::UFixed()
 	: value(0)
 {
 }
@@ -125,19 +125,19 @@ constexpr UFixed<Integer, Fraction>::UFixed(const long double & value)
 //
 
 template< unsigned Integer, unsigned Fraction >
-constexpr typename UFixed<Integer, Fraction>::InternalType UFixed<Integer, Fraction>::getInternal(void) const
+constexpr typename UFixed<Integer, Fraction>::InternalType UFixed<Integer, Fraction>::getInternal() const
 {
 	return this->value;
 }
 
 template< unsigned Integer, unsigned Fraction >
-constexpr typename UFixed<Integer, Fraction>::IntegerType UFixed<Integer, Fraction>::getInteger(void) const
+constexpr typename UFixed<Integer, Fraction>::IntegerType UFixed<Integer, Fraction>::getInteger() const
 {
 	return static_cast<IntegerType>(this->value >> IntegerShift) & IntegerMask;
 }
 
 template< unsigned Integer, unsigned Fraction >
-constexpr typename UFixed<Integer, Fraction>::FractionType UFixed<Integer, Fraction>::getFraction(void) const
+constexpr typename UFixed<Integer, Fraction>::FractionType UFixed<Integer, Fraction>::getFraction() const
 {
 	return static_cast<FractionType>(this->value >> FractionShift) & FractionMask;
 }
@@ -147,32 +147,32 @@ constexpr typename UFixed<Integer, Fraction>::FractionType UFixed<Integer, Fract
 //
 
 template< unsigned Integer, unsigned Fraction >
-constexpr UFixed<Integer, Fraction>::operator IntegerType(void) const
+constexpr UFixed<Integer, Fraction>::operator IntegerType() const
 {
 	return this->getInteger();
 }
 
 template< unsigned Integer, unsigned Fraction >
-constexpr UFixed<Integer, Fraction>::operator float(void) const
+constexpr UFixed<Integer, Fraction>::operator float() const
 {
 	return ((this->value & IdentityMask) * (1.0F / Scale));
 }
 
 template< unsigned Integer, unsigned Fraction >
-constexpr UFixed<Integer, Fraction>::operator double(void) const
+constexpr UFixed<Integer, Fraction>::operator double() const
 {
 	return ((this->value & IdentityMask) * (1.0 / Scale));
 }
 
 template< unsigned Integer, unsigned Fraction >
-constexpr UFixed<Integer, Fraction>::operator long double(void) const
+constexpr UFixed<Integer, Fraction>::operator long double() const
 {
 	return ((this->value & IdentityMask) * (1.0L / Scale));
 }
 
 template< unsigned Integer, unsigned Fraction >
 template< unsigned IntegerOut, unsigned FractionOut >
-constexpr UFixed<Integer, Fraction>::operator UFixed<IntegerOut, FractionOut>(void) const
+constexpr UFixed<Integer, Fraction>::operator UFixed<IntegerOut, FractionOut>() const
 {
 	using OutputType = UFixed<IntegerOut, FractionOut>;
 	using OutputInternalType = typename OutputType::InternalType;
@@ -204,14 +204,14 @@ constexpr UFixed<Integer, Fraction> UFixed<Integer, Fraction>::fromInternal(cons
 //
 
 template< unsigned Integer, unsigned Fraction >
-UFixed<Integer, Fraction> & UFixed<Integer, Fraction>::operator ++(void)
+UFixed<Integer, Fraction> & UFixed<Integer, Fraction>::operator ++()
 {
 	this->value += (1 << FractionSize);
 	return *this;
 }
 
 template< unsigned Integer, unsigned Fraction >
-UFixed<Integer, Fraction> & UFixed<Integer, Fraction>::operator --(void)
+UFixed<Integer, Fraction> & UFixed<Integer, Fraction>::operator --()
 {
 	this->value -= (1 << FractionSize);
 	return *this;

@@ -64,7 +64,7 @@ protected:
 
 	public:
 		constexpr inline explicit RawType(const InternalType & value) : value(value) {}
-		constexpr inline explicit operator InternalType(void) const { return this->value; }
+		constexpr inline explicit operator InternalType() const { return this->value; }
 	};
 
 protected:
@@ -74,7 +74,7 @@ protected:
 	constexpr SFixed(const RawType & value);
 
 public:
-	constexpr SFixed(void);
+	constexpr SFixed();
 	constexpr SFixed(const IntegerType & integer, const FractionType & fraction);
 	constexpr SFixed(const char & value);
 	constexpr SFixed(const unsigned char & value);
@@ -91,23 +91,23 @@ public:
 	constexpr SFixed(const float & value);
 	constexpr SFixed(const long double & value);
 
-	constexpr InternalType getInternal(void) const;
-	constexpr IntegerType getInteger(void) const;
-	constexpr FractionType getFraction(void) const;
+	constexpr InternalType getInternal() const;
+	constexpr IntegerType getInteger() const;
+	constexpr FractionType getFraction() const;
 
-	constexpr explicit operator IntegerType(void) const;
-	constexpr explicit operator float(void) const;
-	constexpr explicit operator double(void) const;
-	constexpr explicit operator long double(void) const;
+	constexpr explicit operator IntegerType() const;
+	constexpr explicit operator float() const;
+	constexpr explicit operator double() const;
+	constexpr explicit operator long double() const;
 
 	template< unsigned IntegerOut, unsigned FractionOut >
-	constexpr explicit operator SFixed<IntegerOut, FractionOut>(void) const;
+	constexpr explicit operator SFixed<IntegerOut, FractionOut>() const;
 
 	constexpr static SFixed fromInternal(const InternalType & value);
 
-	constexpr SFixed operator -(void) const;
-	SFixed & operator ++(void);
-	SFixed & operator --(void);
+	constexpr SFixed operator -() const;
+	SFixed & operator ++();
+	SFixed & operator --();
 	SFixed & operator +=(const SFixed & other);
 	SFixed & operator -=(const SFixed & other);
 	SFixed & operator *=(const SFixed & other);
