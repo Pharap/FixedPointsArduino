@@ -44,7 +44,7 @@ namespace FIXED_POINTS_DETAILS
 	struct BitSize
 	{
 		BitSize() = delete;
-		constexpr static const auto Value = sizeof(T) * CHAR_BIT;
+		static constexpr auto Value = sizeof(T) * CHAR_BIT;
 	};
 
 	template< bool Condition, typename TTrue, typename TFalse >
@@ -119,21 +119,21 @@ namespace FIXED_POINTS_DETAILS
 	struct MsbMask
 	{
 		MsbMask() = delete;
-		constexpr static LeastUInt<Bits> Value = (1ull << (Bits - 1));
+		static constexpr LeastUInt<Bits> Value = (1ull << (Bits - 1));
 	};
 
 	template< unsigned Bits >
 	struct IdentityMask
 	{
 		IdentityMask() = delete;
-		constexpr static LeastUInt<Bits> Value = 1 | (IdentityMask<Bits - 1>::Value << 1);
+		static constexpr LeastUInt<Bits> Value = 1 | (IdentityMask<Bits - 1>::Value << 1);
 	};
 
 	template<>
 	struct IdentityMask<0>
 	{
 		IdentityMask() = delete;
-		constexpr static LeastUInt<0> Value = 0;
+		static constexpr LeastUInt<0> Value = 0;
 	};
 	
 #if !defined(FIXED_POINTS_NO_RANDOM)
