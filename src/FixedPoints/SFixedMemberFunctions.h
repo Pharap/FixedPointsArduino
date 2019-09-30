@@ -25,7 +25,7 @@ constexpr SFixed<Integer, Fraction>::SFixed(const RawType & value)
 }
 
 template< unsigned Integer, unsigned Fraction >
-constexpr SFixed<Integer, Fraction>::SFixed(void)
+constexpr SFixed<Integer, Fraction>::SFixed()
 	: value(0)
 {
 }
@@ -125,19 +125,19 @@ constexpr SFixed<Integer, Fraction>::SFixed(const long double & value)
 //
 
 template< unsigned Integer, unsigned Fraction >
-constexpr typename SFixed<Integer, Fraction>::InternalType SFixed<Integer, Fraction>::getInternal(void) const
+constexpr typename SFixed<Integer, Fraction>::InternalType SFixed<Integer, Fraction>::getInternal() const
 {
 	return this->value;
 }
 
 template< unsigned Integer, unsigned Fraction >
-constexpr typename SFixed<Integer, Fraction>::IntegerType SFixed<Integer, Fraction>::getInteger(void) const
+constexpr typename SFixed<Integer, Fraction>::IntegerType SFixed<Integer, Fraction>::getInteger() const
 {
 	return (static_cast<IntegerType>(this->value >> IntegerShift) & IntegerMask) | ((this->value < 0) ? ~IntegerMask : 0);
 }
 
 template< unsigned Integer, unsigned Fraction >
-constexpr typename SFixed<Integer, Fraction>::FractionType SFixed<Integer, Fraction>::getFraction(void) const
+constexpr typename SFixed<Integer, Fraction>::FractionType SFixed<Integer, Fraction>::getFraction() const
 {
 	return static_cast<FractionType>(this->value >> FractionShift) & FractionMask;
 }
@@ -147,13 +147,13 @@ constexpr typename SFixed<Integer, Fraction>::FractionType SFixed<Integer, Fract
 //
 
 template< unsigned Integer, unsigned Fraction >
-constexpr SFixed<Integer, Fraction>::operator IntegerType(void) const
+constexpr SFixed<Integer, Fraction>::operator IntegerType() const
 {
 	return this->getInteger();
 }
 
 template< unsigned Integer, unsigned Fraction >
-constexpr SFixed<Integer, Fraction>::operator float(void) const
+constexpr SFixed<Integer, Fraction>::operator float() const
 {
 	return (1.0F / Scale) *
 	static_cast<InternalType>
@@ -162,7 +162,7 @@ constexpr SFixed<Integer, Fraction>::operator float(void) const
 }
 
 template< unsigned Integer, unsigned Fraction >
-constexpr SFixed<Integer, Fraction>::operator double(void) const
+constexpr SFixed<Integer, Fraction>::operator double() const
 {
 	return (1.0 / Scale) *
 	static_cast<InternalType>
@@ -171,7 +171,7 @@ constexpr SFixed<Integer, Fraction>::operator double(void) const
 }
 
 template< unsigned Integer, unsigned Fraction >
-constexpr SFixed<Integer, Fraction>::operator long double(void) const
+constexpr SFixed<Integer, Fraction>::operator long double() const
 {
 	return (1.0L / Scale) *
 	static_cast<InternalType>
@@ -181,7 +181,7 @@ constexpr SFixed<Integer, Fraction>::operator long double(void) const
 
 template< unsigned Integer, unsigned Fraction >
 template< unsigned IntegerOut, unsigned FractionOut >
-constexpr SFixed<Integer, Fraction>::operator SFixed<IntegerOut, FractionOut>(void) const
+constexpr SFixed<Integer, Fraction>::operator SFixed<IntegerOut, FractionOut>() const
 {	
 	using OutputType = SFixed<IntegerOut, FractionOut>;
 	using OutputInternalType = typename OutputType::InternalType;
@@ -209,7 +209,7 @@ constexpr SFixed<Integer, Fraction> SFixed<Integer, Fraction>::fromInternal(cons
 }
 
 template< unsigned Integer, unsigned Fraction >
-constexpr SFixed<Integer, Fraction> SFixed<Integer, Fraction>::operator -(void) const
+constexpr SFixed<Integer, Fraction> SFixed<Integer, Fraction>::operator -() const
 {
 	return SFixed<Integer, Fraction>::fromInternal(-this->value);
 }
@@ -219,14 +219,14 @@ constexpr SFixed<Integer, Fraction> SFixed<Integer, Fraction>::operator -(void) 
 //
 
 template< unsigned Integer, unsigned Fraction >
-SFixed<Integer, Fraction> & SFixed<Integer, Fraction>::operator ++(void)
+SFixed<Integer, Fraction> & SFixed<Integer, Fraction>::operator ++()
 {
 	this->value += (1 << FractionSize);
 	return *this;
 }
 
 template< unsigned Integer, unsigned Fraction >
-SFixed<Integer, Fraction> & SFixed<Integer, Fraction>::operator --(void)
+SFixed<Integer, Fraction> & SFixed<Integer, Fraction>::operator --()
 {
 	this->value -= (1 << FractionSize);
 	return *this;
