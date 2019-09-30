@@ -26,10 +26,10 @@ template< unsigned Integer, unsigned Fraction >
 class UFixed
 {
 public:
-	constexpr static uintmax_t IntegerSize = Integer;
-	constexpr static uintmax_t FractionSize = Fraction;
-	constexpr static uintmax_t LogicalSize = IntegerSize + FractionSize;
-	constexpr static uintmax_t Scale = UINTMAX_C(1) << FractionSize;
+	static constexpr uintmax_t IntegerSize = Integer;
+	static constexpr uintmax_t FractionSize = Fraction;
+	static constexpr uintmax_t LogicalSize = IntegerSize + FractionSize;
+	static constexpr uintmax_t Scale = UINTMAX_C(1) << FractionSize;
 
 public:
 	static_assert(LogicalSize <= FIXED_POINTS_DETAILS::BitSize<uintmax_t>::Value, "Platform does not have a native type large enough for UFixed.");
@@ -39,22 +39,22 @@ public:
 	using FractionType = FIXED_POINTS_DETAILS::LeastUInt<FractionSize>;
 	using InternalType = FIXED_POINTS_DETAILS::LeastUInt<LogicalSize>;
 
-	constexpr static uintmax_t InternalSize = FIXED_POINTS_DETAILS::BitSize<InternalType>::Value;
+	static constexpr uintmax_t InternalSize = FIXED_POINTS_DETAILS::BitSize<InternalType>::Value;
 	
 	using ShiftType = FIXED_POINTS_DETAILS::LeastUInt<LogicalSize>;
 	using MaskType = FIXED_POINTS_DETAILS::LeastUInt<LogicalSize>;
 		
 public:
-	constexpr static ShiftType IntegerShift = FractionSize;
-	constexpr static ShiftType FractionShift = 0;
+	static constexpr ShiftType IntegerShift = FractionSize;
+	static constexpr ShiftType FractionShift = 0;
 	
-	constexpr static MaskType IntegerMask = FIXED_POINTS_DETAILS::IdentityMask<IntegerSize>::Value;
-	constexpr static MaskType FractionMask = FIXED_POINTS_DETAILS::IdentityMask<FractionSize>::Value;
+	static constexpr MaskType IntegerMask = FIXED_POINTS_DETAILS::IdentityMask<IntegerSize>::Value;
+	static constexpr MaskType FractionMask = FIXED_POINTS_DETAILS::IdentityMask<FractionSize>::Value;
 	
-	constexpr static MaskType IdentityMask = (IntegerMask << IntegerShift) | (FractionMask << FractionShift);
+	static constexpr MaskType IdentityMask = (IntegerMask << IntegerShift) | (FractionMask << FractionShift);
 	
-	constexpr static MaskType MidpointMask = FIXED_POINTS_DETAILS::MsbMask<FractionSize>::Value;
-	constexpr static MaskType LesserMidpointMask = MidpointMask - 1;
+	static constexpr MaskType MidpointMask = FIXED_POINTS_DETAILS::MsbMask<FractionSize>::Value;
+	static constexpr MaskType LesserMidpointMask = MidpointMask - 1;
 
 protected:
 	class RawType
@@ -104,7 +104,7 @@ public:
 	template< unsigned IntegerOut, unsigned FractionOut >
 	constexpr explicit operator UFixed<IntegerOut, FractionOut>() const;
 
-	constexpr static UFixed fromInternal(const InternalType & value);
+	static constexpr UFixed fromInternal(const InternalType & value);
 
 	UFixed & operator ++();
 	UFixed & operator --();
@@ -114,15 +114,15 @@ public:
 	UFixed & operator /=(const UFixed & other);
 	
 public:
-	constexpr static UFixed Epsilon = UFixed::fromInternal(1);
-	constexpr static UFixed MinValue = UFixed::fromInternal(0);
-	constexpr static UFixed MaxValue = UFixed::fromInternal(~0);
+	static constexpr UFixed Epsilon = UFixed::fromInternal(1);
+	static constexpr UFixed MinValue = UFixed::fromInternal(0);
+	static constexpr UFixed MaxValue = UFixed::fromInternal(~0);
 	
 	// 40 digits is probably enough for these
-	constexpr static UFixed Pi = 3.1415926535897932384626433832795028841971;
-	constexpr static UFixed E = 2.718281828459045235360287471352662497757;
-	constexpr static UFixed Phi = 1.6180339887498948482045868343656381177203;
-	constexpr static UFixed Tau = 6.2831853071795864769252867665590057683943;
+	static constexpr UFixed Pi = 3.1415926535897932384626433832795028841971;
+	static constexpr UFixed E = 2.718281828459045235360287471352662497757;
+	static constexpr UFixed Phi = 1.6180339887498948482045868343656381177203;
+	static constexpr UFixed Tau = 6.2831853071795864769252867665590057683943;
 };
 
 

@@ -26,10 +26,10 @@ template< unsigned Integer, unsigned Fraction >
 class SFixed
 {
 public:
-	constexpr static uintmax_t IntegerSize = Integer + 1;
-	constexpr static uintmax_t FractionSize = Fraction;
-	constexpr static uintmax_t LogicalSize = IntegerSize + FractionSize;
-	constexpr static uintmax_t Scale = UINTMAX_C(1) << FractionSize;
+	static constexpr uintmax_t IntegerSize = Integer + 1;
+	static constexpr uintmax_t FractionSize = Fraction;
+	static constexpr uintmax_t LogicalSize = IntegerSize + FractionSize;
+	static constexpr uintmax_t Scale = UINTMAX_C(1) << FractionSize;
 
 public:
 	static_assert(LogicalSize <= FIXED_POINTS_DETAILS::BitSize<intmax_t>::Value, "Platform does not have a native type large enough for SFixed.");
@@ -39,22 +39,22 @@ public:
 	using FractionType = FIXED_POINTS_DETAILS::LeastUInt<FractionSize>;
 	using InternalType = FIXED_POINTS_DETAILS::LeastInt<LogicalSize>;
 
-	constexpr static uintmax_t InternalSize = FIXED_POINTS_DETAILS::BitSize<InternalType>::Value;
+	static constexpr uintmax_t InternalSize = FIXED_POINTS_DETAILS::BitSize<InternalType>::Value;
 	
 	using ShiftType = FIXED_POINTS_DETAILS::LeastUInt<LogicalSize>;
 	using MaskType = FIXED_POINTS_DETAILS::LeastUInt<LogicalSize>;
 		
 public:
-	constexpr static ShiftType IntegerShift = FractionSize;
-	constexpr static ShiftType FractionShift = 0;
+	static constexpr ShiftType IntegerShift = FractionSize;
+	static constexpr ShiftType FractionShift = 0;
 	
-	constexpr static MaskType IntegerMask = FIXED_POINTS_DETAILS::IdentityMask<IntegerSize>::Value;
-	constexpr static MaskType FractionMask = FIXED_POINTS_DETAILS::IdentityMask<FractionSize>::Value;
+	static constexpr MaskType IntegerMask = FIXED_POINTS_DETAILS::IdentityMask<IntegerSize>::Value;
+	static constexpr MaskType FractionMask = FIXED_POINTS_DETAILS::IdentityMask<FractionSize>::Value;
 	
-	constexpr static MaskType IdentityMask = (IntegerMask << IntegerShift) | (FractionMask << FractionShift);
+	static constexpr MaskType IdentityMask = (IntegerMask << IntegerShift) | (FractionMask << FractionShift);
 	
-	constexpr static MaskType MidpointMask = FIXED_POINTS_DETAILS::MsbMask<FractionSize>::Value;
-	constexpr static MaskType LesserMidpointMask = MidpointMask - 1;
+	static constexpr MaskType MidpointMask = FIXED_POINTS_DETAILS::MsbMask<FractionSize>::Value;
+	static constexpr MaskType LesserMidpointMask = MidpointMask - 1;
 
 protected:
 	class RawType
@@ -103,7 +103,7 @@ public:
 	template< unsigned IntegerOut, unsigned FractionOut >
 	constexpr explicit operator SFixed<IntegerOut, FractionOut>() const;
 
-	constexpr static SFixed fromInternal(const InternalType & value);
+	static constexpr SFixed fromInternal(const InternalType & value);
 
 	constexpr SFixed operator -() const;
 	SFixed & operator ++();
@@ -114,15 +114,15 @@ public:
 	SFixed & operator /=(const SFixed & other);
 	
 public:
-	constexpr static SFixed Epsilon = SFixed::fromInternal(1);
-	constexpr static SFixed MinValue = SFixed::fromInternal(FIXED_POINTS_DETAILS::MsbMask<InternalSize>::Value);
-	constexpr static SFixed MaxValue = SFixed::fromInternal(~FIXED_POINTS_DETAILS::MsbMask<InternalSize>::Value);
+	static constexpr SFixed Epsilon = SFixed::fromInternal(1);
+	static constexpr SFixed MinValue = SFixed::fromInternal(FIXED_POINTS_DETAILS::MsbMask<InternalSize>::Value);
+	static constexpr SFixed MaxValue = SFixed::fromInternal(~FIXED_POINTS_DETAILS::MsbMask<InternalSize>::Value);
 	
 	// 40 digits is probably enough for these
-	constexpr static SFixed Pi = 3.1415926535897932384626433832795028841971;
-	constexpr static SFixed E = 2.718281828459045235360287471352662497757;
-	constexpr static SFixed Phi = 1.6180339887498948482045868343656381177203;
-	constexpr static SFixed Tau = 6.2831853071795864769252867665590057683943;
+	static constexpr SFixed Pi = 3.1415926535897932384626433832795028841971;
+	static constexpr SFixed E = 2.718281828459045235360287471352662497757;
+	static constexpr SFixed Phi = 1.6180339887498948482045868343656381177203;
+	static constexpr SFixed Tau = 6.2831853071795864769252867665590057683943;
 };
 
 
