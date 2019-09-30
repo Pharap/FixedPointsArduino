@@ -119,21 +119,21 @@ namespace FIXED_POINTS_DETAILS
 	struct MsbMask
 	{
 		MsbMask() = delete;
-		constexpr const static LeastUInt<Bits> Value = (1ull << (Bits - 1));
+		constexpr static LeastUInt<Bits> Value = (1ull << (Bits - 1));
 	};
 
 	template< unsigned Bits >
 	struct IdentityMask
 	{
 		IdentityMask() = delete;
-		constexpr const static LeastUInt<Bits> Value = 1 | (IdentityMask<Bits - 1>::Value << 1);
+		constexpr static LeastUInt<Bits> Value = 1 | (IdentityMask<Bits - 1>::Value << 1);
 	};
 
 	template<>
 	struct IdentityMask<0>
 	{
 		IdentityMask() = delete;
-		constexpr const static LeastUInt<0> Value = 0;
+		constexpr static LeastUInt<0> Value = 0;
 	};
 	
 #if !defined(FIXED_POINTS_NO_RANDOM)
