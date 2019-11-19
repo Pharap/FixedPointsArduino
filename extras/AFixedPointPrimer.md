@@ -7,7 +7,7 @@ Integers are numbers that do not have a fractional component in them.
 For example 0, 1, 42, 128, 10000 are all integers
 
 Numbers that do have a fractional component are called 'rational' numbers.
-They are often represented either as fractions or as numbers with a 'radix point'in them (often called a 'decimal point' in day-to-day maths)
+They are often represented either as fractions or as numbers with a 'radix point' in them (often called a 'decimal point' in day-to-day maths).
 For example 0.5, 1.75, 42.42, 128.367 and 10000.00001 are all rational numbers.
 
 Normally computers represent these in what is called a 'floating point' format.
