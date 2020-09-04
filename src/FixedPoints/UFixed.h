@@ -22,6 +22,9 @@ FIXED_POINTS_BEGIN_NAMESPACE
 // Declaration
 //
 
+template< unsigned IntegerOut, unsigned FractionOut >
+class SFixed; // forward declaration of SFixed for casting between SFixed and UFixed
+
 template< unsigned Integer, unsigned Fraction >
 class UFixed
 {
@@ -103,6 +106,8 @@ public:
 
 	template< unsigned IntegerOut, unsigned FractionOut >
 	constexpr explicit operator UFixed<IntegerOut, FractionOut>() const;
+	template< unsigned IntegerOut, unsigned FractionOut >
+	constexpr explicit operator SFixed<IntegerOut, FractionOut>() const;
 
 	static constexpr UFixed fromInternal(const InternalType & value);
 

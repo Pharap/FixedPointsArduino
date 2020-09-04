@@ -176,11 +176,11 @@ This means that you may write code such as `UFixed<8, 8> value = 0.5;` without i
 - `double`.
 - The smallest unsigned type capable of holding its integer part. I.e. a type of at least `I` bits.
 - Another `UFixed` type of a different scale. E.g. `UFixed<4, 4>` may be converted to `UFixed<8, 8>` and vice versa.
+- Another `SFixed` type of a different scale. E.g. `UFixed<4, 4>` may be converted to `SFixed<7, 8>` and vice versa.
 
 `SFixed<I, F>` is explicitly convertible to:
 - `float`.
 - `double`.
 - The smallest signed type capable of holding its integer part. I.e. a type of at least `I + 1` bits.
 - Another `SFixed` type of a different scale. E.g. `SFixed<3, 4>` may be converted to `SFixed<7, 8>` and vice versa.
-
-
+- Another `UFixed` type of a different scale. E.g. `SFixed<3, 4>` may be converted to `UFixed<8, 8>` and vice versa.
