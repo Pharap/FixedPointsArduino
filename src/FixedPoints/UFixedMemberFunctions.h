@@ -177,10 +177,10 @@ constexpr UFixed<Integer, Fraction>::operator UFixed<IntegerOut, FractionOut>() 
 	using OutputType = UFixed<IntegerOut, FractionOut>;
 	using OutputInternalType = typename OutputType::InternalType;
 	using OutputShiftType = typename OutputType::ShiftType;
-	
+
 	using InputType = UFixed<Integer, Fraction>;
 	using InputShiftType = typename InputType::ShiftType;
-	
+
 	return
 	(FractionOut > FractionSize) ?
 		OutputType::fromInternal(static_cast<OutputInternalType>(static_cast<OutputShiftType>(this->value) << ((FractionOut > FractionSize) ? (FractionOut - FractionSize) : 0))) :
@@ -215,6 +215,22 @@ UFixed<Integer, Fraction> & UFixed<Integer, Fraction>::operator --()
 {
 	this->value -= (1 << FractionSize);
 	return *this;
+}
+
+template< unsigned Integer, unsigned Fraction >
+UFixed<Integer, Fraction> UFixed<Integer, Fraction>::operator ++(int)
+{
+    const UFixed<Integer, Fraction> old(*this);
+    ++(*this);
+    return old;
+}
+
+template< unsigned Integer, unsigned Fraction >
+UFixed<Integer, Fraction> UFixed<Integer, Fraction>::operator --(int)
+{
+    const UFixed<Integer, Fraction> old(*this);
+    --(*this);
+    return old;
 }
 
 //

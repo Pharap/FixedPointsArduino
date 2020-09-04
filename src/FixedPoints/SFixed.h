@@ -108,6 +108,8 @@ public:
 	constexpr SFixed operator -() const;
 	SFixed & operator ++();
 	SFixed & operator --();
+	SFixed operator ++(int);
+	SFixed operator --(int);
 	SFixed & operator +=(const SFixed & other);
 	SFixed & operator -=(const SFixed & other);
 	SFixed & operator *=(const SFixed & other);

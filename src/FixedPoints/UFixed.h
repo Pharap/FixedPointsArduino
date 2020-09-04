@@ -108,6 +108,8 @@ public:
 
 	UFixed & operator ++();
 	UFixed & operator --();
+	UFixed operator ++(int);
+	UFixed operator --(int);
 	UFixed & operator +=(const UFixed & other);
 	UFixed & operator -=(const UFixed & other);
 	UFixed & operator *=(const UFixed & other);

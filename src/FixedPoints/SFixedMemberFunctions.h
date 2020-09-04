@@ -232,6 +232,22 @@ SFixed<Integer, Fraction> & SFixed<Integer, Fraction>::operator --()
 	return *this;
 }
 
+template< unsigned Integer, unsigned Fraction >
+SFixed<Integer, Fraction> SFixed<Integer, Fraction>::operator ++(int)
+{
+    const SFixed<Integer, Fraction> old(*this);
+    ++(*this);
+    return old;
+}
+
+template< unsigned Integer, unsigned Fraction >
+SFixed<Integer, Fraction> SFixed<Integer, Fraction>::operator --(int)
+{
+    const SFixed<Integer, Fraction> old(*this);
+    --(*this);
+    return old;
+}
+
 //
 // Compound Assignment Operators
 //
