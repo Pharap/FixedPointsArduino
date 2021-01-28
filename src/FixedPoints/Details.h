@@ -31,7 +31,7 @@
 #define FIXED_POINTS_DETAILS FixedPointsDetails
 #endif
 
-#if defined(ESP8266) || defined(ARDUINO_SAM_DUE)
+#if defined(ESP8266) || defined(ESP32) || defined(ARDUINO_SAM_DUE)
 #define FIXED_POINTS_NO_RANDOM
 #endif
 
