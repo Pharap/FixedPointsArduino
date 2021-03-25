@@ -277,6 +277,28 @@ constexpr auto operator /(const UFixed<IntegerLeft, FractionLeft> & left, const 
 	{\
 		return (UFixed<Integer, Fraction>(left) op right);\
 	}
+
+#define DELETED_BITSHIFT_OPERATOR( type, op )\
+	template< unsigned Integer, unsigned Fraction >\
+	constexpr UFixed<Integer, Fraction> operator op (const UFixed<Integer, Fraction> & left, const type & right) = delete;\
+	\
+	template< unsigned Integer, unsigned Fraction >\
+	inline UFixed<Integer, Fraction> operator op##= (const UFixed<Integer, Fraction> & left, const type & right) = delete;
+
+#define BITSHIFT_OPERATOR( type, op )\
+	template< unsigned Integer, unsigned Fraction >\
+	constexpr UFixed<Integer, Fraction> operator op (const UFixed<Integer, Fraction> & left, const type & right)\
+	{\
+		using InternalType = typename UFixed<Integer, Fraction>::InternalType;\
+		return UFixed<Integer, Fraction>::fromInternal(static_cast<InternalType>(left.getInternal() op right));\
+	}\
+	\
+	template< unsigned Integer, unsigned Fraction >\
+	inline UFixed<Integer, Fraction> & operator op##= (UFixed<Integer, Fraction> & left, const type & right)\
+	{\
+		left = (left op right);\
+		return left;\
+	}
 	
 #define LOGIC_OPERATORS( type )\
 	LOGIC_OPERATOR( type, == )\
@@ -291,33 +313,54 @@ constexpr auto operator /(const UFixed<IntegerLeft, FractionLeft> & left, const 
 	ARITHMETIC_OPERATOR( type, - )\
 	ARITHMETIC_OPERATOR( type, * )\
 	ARITHMETIC_OPERATOR( type, / )
+			
+#define DELETED_BITSHIFT_OPERATORS( type ) \
+	DELETED_BITSHIFT_OPERATOR( type, << )\
+	DELETED_BITSHIFT_OPERATOR( type, >> )
+			
+#define BITSHIFT_OPERATORS( type ) \
+	BITSHIFT_OPERATOR( type, << )\
+	BITSHIFT_OPERATOR( type, >> )
 		
-#define OPERATORS( type ) \
+#define FLOAT_OPERATORS( type ) \
 	LOGIC_OPERATORS( type )\
-	ARITHMETIC_OPERATORS( type )
+	ARITHMETIC_OPERATORS( type )\
+	DELETED_BITSHIFT_OPERATORS( type )
+		
+#define INTEGER_OPERATORS( type ) \
+	LOGIC_OPERATORS( type )\
+	ARITHMETIC_OPERATORS( type )\
+	BITSHIFT_OPERATORS( type )
 
-OPERATORS( float )
-OPERATORS( double )
-OPERATORS( long double )
+FLOAT_OPERATORS( float )
+FLOAT_OPERATORS( double )
+FLOAT_OPERATORS( long double )
 
-OPERATORS( char )
-OPERATORS( unsigned char )
-OPERATORS( signed char )
-OPERATORS( unsigned short int )
-OPERATORS( signed short int )
-OPERATORS( unsigned int )
-OPERATORS( signed int )
-OPERATORS( unsigned long int )
-OPERATORS( signed long int )
-OPERATORS( unsigned long long int )
-OPERATORS( signed long long int )
+INTEGER_OPERATORS( char )
+INTEGER_OPERATORS( unsigned char )
+INTEGER_OPERATORS( signed char )
+INTEGER_OPERATORS( unsigned short int )
+INTEGER_OPERATORS( signed short int )
+INTEGER_OPERATORS( unsigned int )
+INTEGER_OPERATORS( signed int )
+INTEGER_OPERATORS( unsigned long int )
+INTEGER_OPERATORS( signed long int )
+INTEGER_OPERATORS( unsigned long long int )
+INTEGER_OPERATORS( signed long long int )
 
 // Prevent Macro-bleed:
 
-#undef OPERATORS
+#undef INTEGER_OPERATORS
+#undef FLOAT_OPERATORS
+
 #undef ARITHMETIC_OPERATORS
 #undef LOGIC_OPERATORS
+#undef BITSHIFT_OPERATORS
+#undef DELETED_BITSHIFT_OPERATORS
+
 #undef ARITHMETIC_OPERATOR
 #undef LOGIC_OPERATOR
+#undef BITSHIFT_OPERATOR
+#undef DELETED_BITSHIFT_OPERATOR
 
 FIXED_POINTS_END_NAMESPACE
