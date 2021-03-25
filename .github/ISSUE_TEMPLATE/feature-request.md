@@ -1,11 +1,13 @@
 ---
 name: Feature Request
 about: The standard template for a feature request
-title: ''
-labels: ''
+title: 'Add this specified feature'
+labels: 'Feature Request'
 assignees: Pharap
 
 ---
+
+_Please ensure that the title of your issue begins with a capitalised imperative verb, such as 'Add'._
 
 _Delete and replace any italicised text and instructions before submitting._
 _You may also delete a section heading when instructed to delete a section._
