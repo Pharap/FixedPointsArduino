@@ -63,8 +63,8 @@ protected:
 		const InternalType value;
 
 	public:
-		constexpr inline explicit RawType(const InternalType & value) : value(value) {}
-		constexpr inline explicit operator InternalType() const { return this->value; }
+		constexpr explicit RawType(const InternalType & value) : value(value) {}
+		constexpr explicit operator InternalType() const { return this->value; }
 	};
 
 protected:
