@@ -189,6 +189,25 @@ constexpr UFixed<Integer, Fraction>::operator UFixed<IntegerOut, FractionOut>() 
 		OutputType::fromInternal(this->value);
 }
 
+template< unsigned Integer, unsigned Fraction >
+template< unsigned IntegerOut, unsigned FractionOut >
+constexpr UFixed<Integer, Fraction>::operator SFixed<IntegerOut, FractionOut>() const
+{
+	using OutputType = SFixed<IntegerOut, FractionOut>;
+	using IntermediaryType = UFixed<IntegerOut + 1, FractionOut>;
+
+	return static_cast<OutputType>(static_cast<IntermediaryType>(*this));
+}
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction>::operator SFixed<Integer - 1, Fraction>() const
+{
+	using OutputType = SFixed<Integer - 1, Fraction>;
+	using OutputInternalType = typename OutputType::InternalType;
+	
+	return OutputType::fromInternal(static_cast<OutputInternalType>(this->value));
+}
+
 //
 // Static Functions
 //
