@@ -29,6 +29,26 @@ constexpr SFixed<Integer * 2, Fraction * 2> multiply(const SFixed<Integer, Fract
 }
 
 //
+// Postincrement and Postdecrement
+//
+
+template< unsigned Integer, unsigned Fraction >
+SFixed<Integer, Fraction> operator ++(SFixed<Integer, Fraction> & value, int)
+{
+	const auto oldValue = value;
+	++value;
+	return oldValue;
+}
+
+template< unsigned Integer, unsigned Fraction >
+SFixed<Integer, Fraction> operator --(SFixed<Integer, Fraction> & value, int)
+{
+	const auto oldValue = value;
+	--value;
+	return oldValue;
+}
+
+//
 // Basic Logic Operations
 //
 
