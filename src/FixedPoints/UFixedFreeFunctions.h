@@ -29,6 +29,26 @@ constexpr UFixed<Integer * 2, Fraction * 2> multiply(const UFixed<Integer, Fract
 }
 
 //
+// Postincrement and Postdecrement
+//
+
+template< unsigned Integer, unsigned Fraction >
+UFixed<Integer, Fraction> operator ++(UFixed<Integer, Fraction> & value, int)
+{
+	const auto oldValue = value;
+	++value;
+	return oldValue;
+}
+
+template< unsigned Integer, unsigned Fraction >
+UFixed<Integer, Fraction> operator --(UFixed<Integer, Fraction> & value, int)
+{
+	const auto oldValue = value;
+	--value;
+	return oldValue;
+}
+
+//
 // Basic Logic Operations
 //
 
