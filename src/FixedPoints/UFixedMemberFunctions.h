@@ -206,14 +206,14 @@ constexpr UFixed<Integer, Fraction> UFixed<Integer, Fraction>::fromInternal(cons
 template< unsigned Integer, unsigned Fraction >
 UFixed<Integer, Fraction> & UFixed<Integer, Fraction>::operator ++()
 {
-	this->value += (1 << FractionSize);
+	this->value += (static_cast<InternalType>(1) << FractionSize);
 	return *this;
 }
 
 template< unsigned Integer, unsigned Fraction >
 UFixed<Integer, Fraction> & UFixed<Integer, Fraction>::operator --()
 {
-	this->value -= (1 << FractionSize);
+	this->value -= (static_cast<InternalType>(1) << FractionSize);
 	return *this;
 }
 
