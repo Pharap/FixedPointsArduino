@@ -147,10 +147,72 @@ constexpr typename UFixed<Integer, Fraction>::FractionType UFixed<Integer, Fract
 //
 
 template< unsigned Integer, unsigned Fraction >
-constexpr UFixed<Integer, Fraction>::operator IntegerType() const
+constexpr UFixed<Integer, Fraction>::operator char() const
 {
 	return this->getInteger();
 }
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction>::operator unsigned char() const
+{
+	return this->getInteger();
+}
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction>::operator signed char() const
+{
+	return this->getInteger();
+}
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction>::operator unsigned short int() const
+{
+	return this->getInteger();
+}
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction>::operator signed short int() const
+{
+	return this->getInteger();
+}
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction>::operator unsigned int() const
+{
+	return this->getInteger();
+}
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction>::operator signed int() const
+{
+	return this->getInteger();
+}
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction>::operator unsigned long int() const
+{
+	return this->getInteger();
+}
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction>::operator signed long int() const
+{
+	return this->getInteger();
+}
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction>::operator unsigned long long int() const
+{
+	return this->getInteger();
+}
+
+template< unsigned Integer, unsigned Fraction >
+constexpr UFixed<Integer, Fraction>::operator signed long long int() const
+{
+	return this->getInteger();
+}
+
+
 
 template< unsigned Integer, unsigned Fraction >
 constexpr UFixed<Integer, Fraction>::operator float() const
