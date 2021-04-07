@@ -99,7 +99,18 @@ public:
 	constexpr IntegerType getInteger() const;
 	constexpr FractionType getFraction() const;
 
-	constexpr explicit operator IntegerType() const;
+	constexpr explicit operator char() const;
+	constexpr explicit operator unsigned char() const;
+	constexpr explicit operator signed char() const;
+	constexpr explicit operator unsigned short int() const;
+	constexpr explicit operator signed short int() const;
+	constexpr explicit operator unsigned int() const;
+	constexpr explicit operator signed int() const;
+	constexpr explicit operator unsigned long int() const;
+	constexpr explicit operator signed long int() const;
+	constexpr explicit operator unsigned long long int() const;
+	constexpr explicit operator signed long long int() const;
+
 	constexpr explicit operator float() const;
 	constexpr explicit operator double() const;
 	constexpr explicit operator long double() const;
