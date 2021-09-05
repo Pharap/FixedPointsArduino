@@ -13,6 +13,5 @@
     "url": "https://github.com/Pharap/FixedPointsArduino.git"
   },
   "license": "Apache-2.0",
-  "version": "1.1.0",
-  "frameworks": "arduino"
+  "version": "1.1.0",  
 }
