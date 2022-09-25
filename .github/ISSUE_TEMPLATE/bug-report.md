@@ -1,13 +1,11 @@
 ---
 name: Bug Report
 about: The standard template for a bug report
-title: 'Fix this specified bug'
+title: 'Problem with ...'
 labels: 'Bug Report'
 assignees: Pharap
 
 ---
-
-_Please ensure that the title of your issue begins with a capitalised imperative verb, such as 'Fix'._
 
 _Delete and replace any italicised text and instructions before submitting._
 _You may also delete a section heading when instructed to delete a section._
