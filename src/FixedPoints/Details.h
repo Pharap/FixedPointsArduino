@@ -126,7 +126,7 @@ namespace FIXED_POINTS_DETAILS
 	struct IdentityMask
 	{
 		IdentityMask() = delete;
-		static constexpr LeastUInt<Bits> Value = 1 | (IdentityMask<Bits - 1>::Value << 1);
+		static constexpr LeastUInt<Bits> Value = 1 | (static_cast<LeastUInt<Bits>>(IdentityMask<Bits - 1>::Value) << 1);
 	};
 
 	template<>
