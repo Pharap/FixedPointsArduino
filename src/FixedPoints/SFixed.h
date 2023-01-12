@@ -44,7 +44,7 @@ public:
 
 	static constexpr uintmax_t InternalSize = FIXED_POINTS_DETAILS::BitSize<InternalType>::Value;
 	
-	using ShiftType = FIXED_POINTS_DETAILS::LeastUInt<LogicalSize>;
+	using ShiftType = FIXED_POINTS_DETAILS::LeastInt<LogicalSize>;
 	using MaskType = FIXED_POINTS_DETAILS::LeastUInt<LogicalSize>;
 		
 public:
