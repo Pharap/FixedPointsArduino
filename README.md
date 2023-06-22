@@ -1,7 +1,7 @@
 # FixedPoints
 A portable fixed point arithmetic library.
 
-Some knowledge of how fixed point types are formatted is required to used this library to full effect.
+Some knowledge of how fixed point types are formatted is required to use this library to full effect.
 No knowledge of how these operations are implemented is required to use them.
 
 This library was written with Arduino in mind, as well as CPUs with limited floating point support.
